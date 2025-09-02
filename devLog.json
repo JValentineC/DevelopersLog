@@ -14,10 +14,10 @@
         "entryNumber": 1,
         "author": "Jonathan Ramirez",
         "content": [
-          "Hey all! I am Jonathan Ramirez, and I am excited to share my journey into and through technology.",
-          "Currently I am working for i.c.stars and began my tech career after going through i.c.stars myself 2 years ago.",
-          "In this log, I will document my experiences, challenges, and achievements as I continue to grow in the tech field.",
-          "Thank you for joining me on this journey!"
+          "Hey all!",
+           "I am Jonathan Ramirez, and I am excited to start this Developers Log",
+           "This Developers Log will be used as a tool to teach HTML, CSS, Javascript, and json syntax for Cycle 58. I am a Tech Fellow and I look forward to sharing my knowledge with you all.",
+           "This log will start off with the following tech stack: HTML, CSS, Javascript, and JSON. The project will evolve into a basic CRUD app Designed for Developers Logs using a SERN stack. I aim to document my own learning journey, share resources, and provide guidance to those who are also navigating the tech landscape. I hope not only to share what I have learned but what others have learned as well."
         ]
       },
       {

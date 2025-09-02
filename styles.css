@@ -1,7 +1,7 @@
 /* Navbar Styles */
 .navbar {
   width: 100%;
-  background: linear-gradient(90deg, #9b4fff 0%, #b22dff 100%);
+  background: linear-gradient(90deg, #72634c 0%, #836b1e 100%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   position: sticky;
   top: 0;
@@ -30,8 +30,8 @@
 }
 .navbar a:hover,
 .navbar a:focus {
-  background: #fff;
-  color: #8f2dff;
+  background: #070000;
+  color: #e0850d;
 }
 
 @media (max-width: 700px) {
@@ -48,12 +48,12 @@
   position: sticky;
   top: 0;
   height: 20vh;
-  background: linear-gradient(135deg, #cd4fff 0%, #fda1d7 100%);
+  background: linear-gradient(135deg, #f7f1e9 0%, #ebc678 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 2.5rem;
+  color: #000000;
+  font-size: 3rem;
   font-weight: bold;
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -73,7 +73,7 @@
 
 .sidebar {
   flex: 0 0 260px;
-  background: linear-gradient(135deg, #fce0fc 0%, #f2cff3 100%);
+  background: linear-gradient(135deg, #f7f1e9 0%, #ebc678 100%);
   border-radius: 12px;
   padding: 2rem 1rem;
   display: flex;
@@ -89,17 +89,17 @@
   object-fit: cover;
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 4px solid #b94fff;
+  border: 4px solid #07010a;
 }
 
 .sidebar h2 {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   margin-bottom: 0.5rem;
-  color: #844fff;
+  color: #060507;
 }
 
 .sidebar p {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #333;
   text-align: center;
 }
@@ -111,8 +111,8 @@
 
 #main-title {
   font-size: 2rem;
-  color: #844fff;
-  margin-bottom: 1.5rem;
+  color: #0a0a0c;
+  margin-bottom: 3rem;
   letter-spacing: 1px;
 }
 
@@ -135,22 +135,23 @@
 }
 
 #dev-logs h3 {
-  color: #882dff;
+  color: #800909;
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
 }
 
 #dev-logs small {
   display: block;
-  color: #888;
+  color: #fa0707;
   margin-bottom: 1rem;
   font-size: 0.95rem;
 }
 
 #dev-logs p {
-  color: #222222;
-  font-size: 1.05rem;
+  color: #000000;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
+  text-indent: 2em;
 }
 
 @media (max-width: 900px) {

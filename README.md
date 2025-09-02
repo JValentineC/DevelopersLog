@@ -19,12 +19,13 @@ This is a personal development log website that displays blog-style entries abou
 
 ```
 DevLog/
-├── myRoadMap.html    # Main HTML file Name this whatever you like
+├── index.html    # Main HTML file Name this whatever you like
 ├── styles.css        # All CSS styling
 ├── scripts.js        # JavaScript for dynamic content
 ├── devLog.json       # Blog entries data
 ├── assets/
 │   └── ProfilePic.jpg
+│   └── And Favicons, etc...
 └── README.md
 ```
 
@@ -32,7 +33,7 @@ DevLog/
 
 1. Open the project folder in VS Code
 2. Install the Live Server extension if not already installed
-3. Right-click on `myRoadMap.html` and select "Open with Live Server"
+3. Right-click on `index.html` and select "Open with Live Server"
 4. The website will open in your default browser
 
 ## How to Add a New Dev Log Entry
@@ -159,7 +160,7 @@ Edit `styles.css` to modify colors, fonts, layout, or responsive behavior
 
 ## File Descriptions
 
-- **myRoadMap.html**: Contains the page structure and navigation
+- **index.html**: Contains the page structure and navigation
 - **styles.css**: All visual styling including layout, colors, and responsive design
 - **scripts.js**: JavaScript code that fetches and displays JSON data
 - **devLog.json**: Database of all blog entries in JSON format

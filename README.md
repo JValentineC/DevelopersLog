@@ -1,5 +1,7 @@
 # Dev Log Website
 
+Github Pages: https://jvalentinec.github.io/DevelopersLog/
+
 ## What This Website Is
 
 This is a personal development log website that displays blog-style entries about a developer's journey in technology. The website loads content dynamically from a JSON file, making it easy to add new entries without modifying the HTML structure.

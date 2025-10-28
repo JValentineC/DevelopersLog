@@ -1,3 +1,16 @@
+/* ===================================
+   BASIC CSS TUTORIAL FOR INTERNS
+   ===================================
+   This file demonstrates fundamental CSS concepts:
+   - Selectors (targeting HTML elements)
+   - Properties (what to style)
+   - Values (how to style it)
+   - Box model (margin, padding, border)
+   - Layout (flexbox basics)
+*/
+
+/* RESET STYLES - Remove browser default styling */
+/* The * selector targets ALL elements on the page */
 * {
   margin: 0; /* Remove default spacing around elements */
   padding: 0; /* Remove default inner spacing */

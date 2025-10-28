@@ -5,8 +5,6 @@
     "welcomeMessage": "Welcome to the development log exercise! Here, I will update you all on projects I am working on, ideas for solutions, or just my thoughts blasted out into the universe.",
     "checkBackMessage": "Feel free to check back regularly for the latest information."
   },
-
-
   "mainContent": {
     "mainTitle": "Development Log",
     "logEntries": [
@@ -37,18 +35,10 @@
         "entryTitle": "Learning JSON",
         "date": "2025-08-07",
         "entryNumber": 3,
-        "author": "wizard  Ramirez",
+        "author": "Jonathan Ramirez",
         "content": [
           "Today I learned how to add new entries to my development log using JSON.",
           "This will help me keep track of my progress and share updates more efficiently."
-        ]
-      },{
-        "entryTitle": "Session on Backend Mock data",
-        "date": "2025-10-20",
-        "entryNumber":48,
-        "author": "Jonathan Ramirez",
-        "content": [
-          "I love C58!."
         ]
       }
     ]

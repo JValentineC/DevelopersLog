@@ -1,0 +1,147 @@
+* {
+  margin: 0; /* Remove default spacing around elements */
+  padding: 0; /* Remove default inner spacing */
+  box-sizing: border-box; /* Include padding/border in element width */
+}
+
+/* BODY STYLING - Sets defaults for the entire page */
+body {
+  font-family: Arial, sans-serif; /* Choose a clean, readable font */
+  line-height: 1.6; /* Space between lines for readability */
+  color: #333; /* Dark gray text color */
+  background-color: #f4f4f4; /* Light gray background */
+}
+
+/* HERO SECTION - The big title at the top */
+.hero {
+  background-color: #2c3e50; /* Dark blue-gray background */
+  color: white; /* White text */
+  text-align: center; /* Center the text */
+  padding: 2rem; /* Add space inside (2rem = 32px) */
+  font-size: 2.5rem; /* Make text large */
+  font-weight: bold; /* Make text thick/bold */
+}
+
+/* NAVIGATION BAR - The menu links */
+.navbar {
+  background-color: #34495e; /* Slightly lighter than hero */
+  padding: 1rem; /* Add space inside */
+}
+
+/* NAVIGATION LIST - Remove default list styling */
+.navbar ul {
+  list-style: none; /* Remove bullet points */
+  display: flex; /* Use flexbox for horizontal layout */
+  justify-content: center; /* Center the navigation items */
+  gap: 2rem; /* Space between navigation items */
+}
+
+/* NAVIGATION LINKS - Style the clickable links */
+.navbar a {
+  color: white; /* White text */
+  text-decoration: none; /* Remove underline */
+  padding: 0.5rem 1rem; /* Add space around text */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth color change on hover */
+}
+
+/* HOVER EFFECT - What happens when you hover over navigation */
+.navbar a:hover {
+  background-color: #2c3e50; /* Darker background on hover */
+}
+
+/* MAIN CONTAINER - Holds sidebar and main content */
+.container {
+  display: flex; /* Use flexbox for side-by-side layout */
+  max-width: 1200px; /* Don't get wider than 1200px */
+  margin: 2rem auto; /* Center container with space above/below */
+  background-color: white; /* White background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  overflow: hidden; /* Hide content that goes outside */
+}
+
+/* SIDEBAR - Left column with profile and about */
+.sidebar {
+  background-color: #ecf0f1; /* Light gray background */
+  padding: 2rem; /* Space inside */
+  width: 300px; /* Fixed width */
+  min-height: 400px; /* Minimum height */
+}
+
+/* PROFILE IMAGE - The profile picture */
+.profile-img {
+  width: 150px; /* Set width */
+  height: 150px; /* Set height */
+  border-radius: 50%; /* Make it circular (50% = perfect circle) */
+  object-fit: cover; /* Crop image to fit without stretching */
+  display: block; /* Make it a block element */
+  margin: 0 auto 1.5rem auto; /* Center it and add space below */
+  border: 3px solid #bdc3c7; /* Add a border around the image */
+}
+
+/* SIDEBAR HEADINGS - h2 elements in the sidebar */
+.sidebar h2 {
+  color: #2c3e50; /* Dark blue-gray color */
+  margin-bottom: 1rem; /* Space below heading */
+  font-size: 1.3rem; /* Slightly larger text */
+}
+
+/* SIDEBAR PARAGRAPHS - Text in the sidebar */
+.sidebar p {
+  color: #555; /* Medium gray text */
+  line-height: 1.5; /* Space between lines */
+}
+
+/* MAIN CONTENT AREA - Right column for main content */
+.main-content {
+  flex: 1; /* Take up remaining space */
+  padding: 2rem; /* Space inside */
+}
+
+/* MAIN TITLE - The h2 in main content */
+.main-content h2 {
+  color: #2c3e50; /* Match sidebar headings */
+  margin-bottom: 1.5rem; /* Space below */
+  font-size: 1.8rem; /* Larger text */
+  border-bottom: 2px solid #3498db; /* Blue underline */
+  padding-bottom: 0.5rem; /* Space between text and underline */
+}
+
+/* RESPONSIVE DESIGN - Make it work on smaller screens */
+/* @media is a "media query" - it applies styles only when conditions are met */
+@media (max-width: 768px) {
+  /* When screen is 768px or smaller (tablets/phones) */
+
+  .container {
+    flex-direction: column; /* Stack sidebar above main content */
+    margin: 1rem; /* Less margin on small screens */
+  }
+
+  .sidebar {
+    width: 100%; /* Full width on small screens */
+  }
+
+  .hero {
+    font-size: 1.8rem; /* Smaller text on small screens */
+    padding: 1rem; /* Less padding */
+  }
+
+  .navbar ul {
+    flex-direction: column; /* Stack navigation vertically */
+    gap: 0.5rem; /* Less space between items */
+  }
+}
+
+/* ===================================
+   CSS CONCEPTS DEMONSTRATED:
+   ===================================
+   1. SELECTORS: .class, element, #id
+   2. BOX MODEL: margin, padding, border
+   3. COLORS: hex codes (#ffffff), rgba()
+   4. LAYOUT: flexbox (display: flex)
+   5. RESPONSIVE: media queries
+   6. EFFECTS: hover states, transitions
+   7. TYPOGRAPHY: font-size, font-weight
+   8. SPACING: rem units (relative to font size)
+*/

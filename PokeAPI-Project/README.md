@@ -54,6 +54,7 @@ console.log(info.types, info.stats, info.abilities);
 ## API Features
 
 The wrapper provides methods for:
+
 - Fetching Pokémon data by name or ID
 - Getting species information
 - Extracting and formatting useful data

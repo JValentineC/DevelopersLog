@@ -2,19 +2,20 @@
 
 This repository contains two separate projects:
 
-## 📝 DevLog-Site
+## 📝 DevLog Website
 
 A personal development log website that displays blog-style entries about my journey in technology. Built with HTML, CSS, and vanilla JavaScript with dynamic JSON-based content.
 
 **Live Site:** https://jvalentinec.github.io/DevelopersLog/
 
 **Features:**
+
 - Dynamic content loading from JSON
 - Responsive design
 - Blog-style dev log entries
 - Professional portfolio presentation
 
-[View DevLog-Site Documentation →](DevLog-Site/README.md)
+[View DevLog Documentation →](docs/README.md)
 
 ---
 
@@ -23,6 +24,7 @@ A personal development log website that displays blog-style entries about my jou
 A collection of demos and utilities for working with the PokéAPI. Includes examples of fetching Pokémon data, displaying stats, and advanced API features.
 
 **Features:**
+
 - API integration examples
 - Data fetching utilities
 - Pokemon stat displays
@@ -35,12 +37,13 @@ A collection of demos and utilities for working with the PokéAPI. Includes exam
 ## Project Structure
 
 ```
-DevLog/
-├── DevLog-Site/          # Personal dev log website
+DevelopersLog/
+├── docs/                 # Personal dev log website (GitHub Pages source)
 │   ├── index.html
 │   ├── scripts.js
 │   ├── styles.css
 │   ├── devLog.json
+│   ├── assets/
 │   └── README.md
 │
 ├── PokeAPI-Project/      # PokeAPI demos and utilities
@@ -57,6 +60,14 @@ DevLog/
 ## Getting Started
 
 Each project has its own README with specific setup instructions. Navigate to the project folder and follow the instructions there.
+
+## GitHub Pages Deployment
+
+The dev log website is deployed from the `/docs` folder. After making changes:
+
+1. Commit and push your changes
+2. In GitHub: Settings → Pages → Source: Deploy from branch → select `main` branch and `/docs` folder
+3. Your site will update at https://jvalentinec.github.io/DevelopersLog/
 
 ## Author
 

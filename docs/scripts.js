@@ -5,27 +5,27 @@ fetch("devLog.json")
     // Set main title from JSON
     document.getElementById("main-title").textContent =
       data.mainContent.mainTitle || "Dev Logs";
-    
+
     const logsContainer = document.getElementById("dev-logs");
     logsContainer.innerHTML = "";
-    
+
     data.mainContent.logEntries.forEach((entry) => {
       const article = document.createElement("article");
-      
+
       const title = document.createElement("h3");
       title.textContent = entry.entryTitle;
       article.appendChild(title);
-      
+
       const meta = document.createElement("small");
       meta.textContent = `#${entry.entryNumber} | ${entry.date} | ${entry.author}`;
       article.appendChild(meta);
-      
+
       entry.content.forEach((paragraph) => {
         const p = document.createElement("p");
         p.textContent = paragraph;
         article.appendChild(p);
       });
-      
+
       logsContainer.appendChild(article);
     });
   })

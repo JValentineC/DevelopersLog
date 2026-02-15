@@ -12,6 +12,75 @@ body {
   background-color: #f4f4f4; /* Light gray background */
 }
 
+/* ==========================
+   DRAWER SYSTEM STYLES
+   ========================== */
+
+/* Drawer Root Container */
+.drawer {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Hidden Checkbox Toggle */
+.drawer-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Drawer Content - Main page content */
+.drawer-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+}
+
+/* Drawer Side - Sidebar wrapper */
+.drawer-side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+/* Drawer Overlay - Dark overlay when drawer is open */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* When checkbox is checked - show drawer */
+.drawer-toggle:checked ~ .drawer-side {
+  transform: translateX(0);
+}
+
+.drawer-toggle:checked ~ .drawer-side .drawer-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================
+   NAVIGATION & HEADER
+   ========================== */
+
 /* HERO SECTION - The big title at the top */
 .hero {
   background-color: #2c3e50; /* Dark blue-gray background */
@@ -26,14 +95,38 @@ body {
 .navbar {
   background-color: #34495e; /* Slightly lighter than hero */
   padding: 1rem; /* Add space inside */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Hamburger Menu Button */
+.drawer-button {
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.drawer-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-icon {
+  width: 24px;
+  height: 24px;
+  stroke: white;
 }
 
 /* NAVIGATION LIST - Remove default list styling */
 .navbar ul {
   list-style: none; /* Remove bullet points */
   display: flex; /* Use flexbox for horizontal layout */
-  justify-content: center; /* Center the navigation items */
   gap: 2rem; /* Space between navigation items */
+  flex: 1;
+  justify-content: center;
 }
 
 /* NAVIGATION LINKS - Style the clickable links */
@@ -50,23 +143,88 @@ body {
   background-color: #2c3e50; /* Darker background on hover */
 }
 
-/* MAIN CONTAINER - Holds sidebar and main content */
+/* ==========================
+   MAIN CONTENT LAYOUT
+   ========================== */
+
+/* MAIN CONTAINER - Holds main content */
 .container {
-  display: flex; /* Use flexbox for side-by-side layout */
   max-width: 1200px; /* Don't get wider than 1200px */
   margin: 2rem auto; /* Center container with space above/below */
-  background-color: white; /* White background */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  overflow: hidden; /* Hide content that goes outside */
+  padding: 0 1rem;
 }
 
-/* SIDEBAR - Left column with profile and about */
+/* Page Title */
+.page-title {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #3498db;
+}
+
+/* MAIN CONTENT AREA - Main column for content */
+.main-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* MAIN TITLE - The h2 in main content */
+.main-content h2 {
+  color: #2c3e50; /* Match sidebar headings */
+  margin-bottom: 1.5rem; /* Space below */
+  font-size: 1.8rem; /* Larger text */
+  border-bottom: 2px solid #3498db; /* Blue underline */
+  padding-bottom: 0.5rem; /* Space between text and underline */
+}
+
+/* DEV LOG ARTICLE ENTRIES */
+#dev-logs article {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-left: 4px solid #3498db;
+  border-radius: 4px;
+}
+
+#dev-logs article h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+#dev-logs article small {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+#dev-logs article p {
+  color: #555;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+#dev-logs article p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================
+   SIDEBAR STYLES
+   ========================== */
+
+/* SIDEBAR - Left drawer sidebar */
 .sidebar {
   background-color: #ecf0f1; /* Light gray background */
   padding: 2rem; /* Space inside */
   width: 300px; /* Fixed width */
-  min-height: 400px; /* Minimum height */
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1001;
 }
 
 /* PROFILE IMAGE - The profile picture */
@@ -93,34 +251,14 @@ body {
   line-height: 1.5; /* Space between lines */
 }
 
-/* MAIN CONTENT AREA - Right column for main content */
-.main-content {
-  flex: 1; /* Take up remaining space */
-  padding: 2rem; /* Space inside */
-}
-
-/* MAIN TITLE - The h2 in main content */
-.main-content h2 {
-  color: #2c3e50; /* Match sidebar headings */
-  margin-bottom: 1.5rem; /* Space below */
-  font-size: 1.8rem; /* Larger text */
-  border-bottom: 2px solid #3498db; /* Blue underline */
-  padding-bottom: 0.5rem; /* Space between text and underline */
-}
+/* ==========================
+   RESPONSIVE DESIGN
+   ========================== */
 
 /* RESPONSIVE DESIGN - Make it work on smaller screens */
 /* @media is a "media query" - it applies styles only when conditions are met */
 @media (max-width: 768px) {
   /* When screen is 768px or smaller (tablets/phones) */
-
-  .container {
-    flex-direction: column; /* Stack sidebar above main content */
-    margin: 1rem; /* Less margin on small screens */
-  }
-
-  .sidebar {
-    width: 100%; /* Full width on small screens */
-  }
 
   .hero {
     font-size: 1.8rem; /* Smaller text on small screens */
@@ -128,8 +266,43 @@ body {
   }
 
   .navbar ul {
-    flex-direction: column; /* Stack navigation vertically */
-    gap: 0.5rem; /* Less space between items */
+    gap: 1rem; /* Less space between items */
+  }
+
+  .navbar {
+    padding: 0.75rem;
+  }
+
+  .container {
+    margin: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  /* Sidebar takes full width on mobile */
+  .drawer-side {
+    width: 80%;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .drawer-side {
+    width: 90%;
+  }
+
+  .page-title {
+    font-size: 1.3rem;
   }
 }
 
@@ -139,9 +312,11 @@ body {
    1. SELECTORS: .class, element, #id
    2. BOX MODEL: margin, padding, border
    3. COLORS: hex codes (#ffffff), rgba()
-   4. LAYOUT: flexbox (display: flex)
+   4. LAYOUT: flexbox (display: flex), fixed positioning
    5. RESPONSIVE: media queries
    6. EFFECTS: hover states, transitions
    7. TYPOGRAPHY: font-size, font-weight
    8. SPACING: rem units (relative to font size)
+   9. DRAWER PATTERN: checkbox hack for sidebar toggle
+   10. TRANSFORMS: translateX for slide animations
 */

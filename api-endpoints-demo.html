@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokéAPI - All Available Endpoints Demo</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+      }
+
+      .section {
+        margin: 30px 0;
+        padding: 20px;
+        border-radius: 10px;
+        background: #f8f9fa;
+        border-left: 5px solid #3498db;
+      }
+
+      .section h2 {
+        color: #2980b9;
+        margin-top: 0;
+      }
+
+      .endpoint-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 15px;
+        margin: 15px 0;
+      }
+
+      .endpoint-card {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+      }
+
+      .endpoint-card:hover {
+        border-color: #3498db;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+      }
+
+      .endpoint-name {
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+      }
+
+      .endpoint-desc {
+        font-size: 0.9em;
+        color: #666;
+        margin: 5px 0;
+      }
+
+      .endpoint-example {
+        font-family: "Courier New", monospace;
+        background: #f1f2f6;
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        color: #2c3e50;
+        margin-top: 8px;
+      }
+
+      .demo-section {
+        background: #e8f4fd;
+        border-left-color: #e74c3c;
+        margin-top: 30px;
+      }
+
+      .demo-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background: #3498db;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #2980b9;
+      }
+
+      .result-container {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 15px 0;
+        max-height: 400px;
+        overflow-y: auto;
+        border: 2px solid #ddd;
+      }
+
+      .loading {
+        text-align: center;
+        color: #666;
+        font-style: italic;
+      }
+
+      .error {
+        color: #e74c3c;
+        background: #fadbd8;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .data-type {
+        background: #27ae60;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        display: inline-block;
+        margin: 2px;
+      }
+
+      .highlight {
+        background: #fff3cd;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #ffc107;
+        margin: 15px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔴 Complete PokéAPI Endpoints Reference</h1>
+
+      <div class="highlight">
+        <strong>📊 What you currently show:</strong> Basic Pokemon info (name,
+        stats, types, abilities, sprites)<br />
+        <strong>🚀 What you can add:</strong>
+        <span id="additional-count">50+</span> more endpoints with evolution
+        chains, moves data, locations, items, and much more!
+      </div>
+
+      <!-- Pokemon Related Endpoints -->
+      <div class="section">
+        <h2>🎯 Pokemon & Species Data</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card">
+            <div class="endpoint-name">Pokemon Species</div>
+            <div class="endpoint-desc"
+              >Flavor text, evolution chains, breeding info</div
+            >
+            <div data-type="species" class="data-type">Species</div>
+            <div class="endpoint-example">GET /pokemon-species/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Pokemon Encounters</div>
+            <div class="endpoint-desc">Where to find Pokemon in games</div>
+            <div data-type="location" class="data-type">Location</div>
+            <div class="endpoint-example">GET /pokemon/{id}/encounters</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Pokemon Forms</div>
+            <div class="endpoint-desc"
+              >Different forms (Alolan, Galarian, etc.)</div
+            >
+            <div data-type="forms" class="data-type">Forms</div>
+            <div class="endpoint-example">GET /pokemon-form/{id}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evolution Endpoints -->
+      <div class="section">
+        <h2>🔄 Evolution System</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card">
+            <div class="endpoint-name">Evolution Chains</div>
+            <div class="endpoint-desc"
+              >Complete evolution trees with requirements</div
+            >
+            <div data-type="evolution" class="data-type">Evolution</div>
+            <div class="endpoint-example">GET /evolution-chain/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Evolution Triggers</div>
+            <div class="endpoint-desc">Level-up, stones, trading, etc.</div>
+            <div data-type="evolution" class="data-type">Evolution</div>
+            <div class="endpoint-example">GET /evolution-trigger/{id}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Moves Endpoints -->
+      <div class="section">
+        <h2>⚔️ Moves & Combat</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card">
+            <div class="endpoint-name">Individual Moves</div>
+            <div class="endpoint-desc">Power, accuracy, PP, descriptions</div>
+            <div data-type="moves" class="data-type">Moves</div>
+            <div class="endpoint-example">GET /move/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Move Categories</div>
+            <div class="endpoint-desc">Physical, Special, Status</div>
+            <div data-type="moves" class="data-type">Moves</div>
+            <div class="endpoint-example">GET /move-category/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Move Learn Methods</div>
+            <div class="endpoint-desc">Level-up, TM, Tutor, Breeding</div>
+            <div data-type="moves" class="data-type">Moves</div>
+            <div class="endpoint-example">GET /move-learn-method/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Move Targets</div>
+            <div class="endpoint-desc"
+              >Single target, all opponents, self, etc.</div
+            >
+            <div data-type="moves" class="data-type">Moves</div>
+            <div class="endpoint-example">GET /move-target/{id}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Types & Stats -->
+      <div class="section">
+        <h2>📊 Types & Combat Stats</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card">
+            <div class="endpoint-name">Type Effectiveness</div>
+            <div class="endpoint-desc"
+              >Super effective, not very effective, immune</div
+            >
+            <div data-type="types" class="data-type">Types</div>
+            <div class="endpoint-example">GET /type/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Individual Stats</div>
+            <div class="endpoint-desc">HP, Attack, Defense, etc. details</div>
+            <div data-type="stats" class="data-type">Stats</div>
+            <div class="endpoint-example">GET /stat/{id}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Items & Equipment -->
+      <div class="section">
+        <h2>🎒 Items & Equipment</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card">
+            <div class="endpoint-name">Items</div>
+            <div class="endpoint-desc"
+              >Pokeballs, potions, berries, key items</div
+            >
+            <div data-type="items" class="data-type">Items</div>
+            <div class="endpoint-example">GET /item/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Item Categories</div>
+            <div class="endpoint-desc">Medicine, Pokeballs, Berries, etc.</div>
+            <div data-type="items" class="data-type">Items</div>
+            <div class="endpoint-example">GET /item-category/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Machines (TMs/HMs)</div>
+            <div class="endpoint-desc">Technical & Hidden Machines</div>
+            <div data-type="items" class="data-type">Items</div>
+            <div class="endpoint-example">GET /machine/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Berries</div>
+            <div class="endpoint-desc">Growth time, flavors, effects</div>
+            <div data-type="items" class="data-type">Items</div>
+            <div class="endpoint-example">GET /berry/{id}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Locations & Regions -->
+      <div class="section">
+        <h2>🗺️ Locations & Regions</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card">
+            <div class="endpoint-name">Locations</div>
+            <div class="endpoint-desc">Cities, routes, buildings</div>
+            <div data-type="location" class="data-type">Location</div>
+            <div class="endpoint-example">GET /location/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Location Areas</div>
+            <div class="endpoint-desc">Specific areas within locations</div>
+            <div data-type="location" class="data-type">Location</div>
+            <div class="endpoint-example">GET /location-area/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Regions</div>
+            <div class="endpoint-desc">Kanto, Johto, Hoenn, etc.</div>
+            <div data-type="location" class="data-type">Location</div>
+            <div class="endpoint-example">GET /region/{id}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Data -->
+      <div class="section">
+        <h2>🎮 Game Versions & Generations</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card">
+            <div class="endpoint-name">Game Versions</div>
+            <div class="endpoint-desc">Red, Blue, Gold, Silver, etc.</div>
+            <div data-type="games" class="data-type">Games</div>
+            <div class="endpoint-example">GET /version/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Version Groups</div>
+            <div class="endpoint-desc"
+              >Paired versions (Red/Blue, Gold/Silver)</div
+            >
+            <div data-type="games" class="data-type">Games</div>
+            <div class="endpoint-example">GET /version-group/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Generations</div>
+            <div class="endpoint-desc"
+              >Gen I, II, III, etc. with Pokemon lists</div
+            >
+            <div data-type="games" class="data-type">Games</div>
+            <div class="endpoint-example">GET /generation/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Pokedexes</div>
+            <div class="endpoint-desc">National, Regional Pokedex data</div>
+            <div data-type="games" class="data-type">Games</div>
+            <div class="endpoint-example">GET /pokedex/{id}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breeding & Characteristics -->
+      <div class="section">
+        <h2>🥚 Breeding & Characteristics</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card">
+            <div class="endpoint-name">Egg Groups</div>
+            <div class="endpoint-desc">Monster, Flying, Field, etc.</div>
+            <div data-type="breeding" class="data-type">Breeding</div>
+            <div class="endpoint-example">GET /egg-group/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Natures</div>
+            <div class="endpoint-desc">Personality traits affecting stats</div>
+            <div data-type="breeding" class="data-type">Breeding</div>
+            <div class="endpoint-example">GET /nature/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Growth Rates</div>
+            <div class="endpoint-desc">How fast Pokemon gain experience</div>
+            <div data-type="breeding" class="data-type">Breeding</div>
+            <div class="endpoint-example">GET /growth-rate/{id}</div>
+          </div>
+          <div class="endpoint-card">
+            <div class="endpoint-name">Gender Ratios</div>
+            <div class="endpoint-desc">Male/Female ratios for species</div>
+            <div data-type="breeding" class="data-type">Breeding</div>
+            <div class="endpoint-example">GET /gender/{id}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo Section -->
+      <div class="section demo-section">
+        <h2>🧪 Interactive API Demo</h2>
+        <p
+          >Click any button below to see live data from these additional
+          endpoints:</p
+        >
+
+        <div class="demo-controls">
+          <button onclick="demoEvolutionChain()"
+            >🔄 Pikachu Evolution Chain</button
+          >
+          <button onclick="demoTypeEffectiveness()"
+            >⚡ Electric Type Effectiveness</button
+          >
+          <button onclick="demoMoveData()">⚔️ Thunderbolt Move Data</button>
+          <button onclick="demoLocationData()">🗺️ Pallet Town Location</button>
+          <button onclick="demoSpeciesData()">📖 Pikachu Species Info</button>
+          <button onclick="demoItemData()">🎒 Pokeball Item Data</button>
+          <button onclick="demoAbilityData()">✨ Static Ability Data</button>
+          <button onclick="demoNatureData()">🎭 Jolly Nature Data</button>
+        </div>
+
+        <div id="demo-result" class="result-container" style="display: none">
+          <div class="loading">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="enhanced-pokeapi.js"></script>
+    <script>
+      // Demo functions
+      async function showResult(title, dataPromise) {
+        const resultDiv = document.getElementById("demo-result");
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML =
+          '<div class="loading">🔄 Loading ' + title + "...</div>";
+
+        try {
+          const data = await dataPromise;
+          resultDiv.innerHTML = `
+                    <h3>${title}</h3>
+                    <pre style="background: #f8f9fa; padding: 15px; border-radius: 5px; overflow-x: auto; max-height: 300px;">${JSON.stringify(
+                      data,
+                      null,
+                      2
+                    )}</pre>
+                `;
+        } catch (error) {
+          resultDiv.innerHTML = `<div class="error">❌ Error loading ${title}: ${error.message}</div>`;
+        }
+      }
+
+      async function demoEvolutionChain() {
+        // Pikachu evolution chain ID is 10
+        await showResult(
+          "Pikachu Evolution Chain",
+          EnhancedPokeAPI.getEvolutionChain(10)
+        );
+      }
+
+      async function demoTypeEffectiveness() {
+        await showResult(
+          "Electric Type Effectiveness",
+          EnhancedPokeAPI.getTypeEffectiveness("electric")
+        );
+      }
+
+      async function demoMoveData() {
+        await showResult(
+          "Thunderbolt Move Data",
+          EnhancedPokeAPI.getMove("thunderbolt")
+        );
+      }
+
+      async function demoLocationData() {
+        await showResult(
+          "Pallet Town Location",
+          EnhancedPokeAPI.getLocation("pallet-town")
+        );
+      }
+
+      async function demoSpeciesData() {
+        await showResult(
+          "Pikachu Species Data",
+          EnhancedPokeAPI.getPokemonSpecies("pikachu")
+        );
+      }
+
+      async function demoItemData() {
+        await showResult(
+          "Pokeball Item Data",
+          EnhancedPokeAPI.getItem("poke-ball")
+        );
+      }
+
+      async function demoAbilityData() {
+        await showResult(
+          "Static Ability Data",
+          EnhancedPokeAPI.getAbility("static")
+        );
+      }
+
+      async function demoNatureData() {
+        await showResult(
+          "Jolly Nature Data",
+          EnhancedPokeAPI.getNature("jolly")
+        );
+      }
+
+      // Count additional endpoints
+      document.addEventListener("DOMContentLoaded", function () {
+        const endpointCards = document.querySelectorAll(".endpoint-card");
+        document.getElementById("additional-count").textContent =
+          endpointCards.length + "+";
+      });
+    </script>
+  </body>
+</html>

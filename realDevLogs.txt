@@ -1,0 +1,782 @@
+PHASE 1 DEV LOG — SESSION 1: FOUNDATION LOOP AND DEBUG HUD
+Date: February 13, 2026
+
+═══════════════════════════════════════════════════════════════════════
+WHAT I BUILT
+═══════════════════════════════════════════════════════════════════════
+
+Files created or modified this session:
+  - test_window.py     Throwaway test to confirm pygame works
+  - setting.py         Constants: screen size, FPS, tile size, colors
+  - src/game_state.py  GameState and MovementMode enums
+  - main.py            Real game loop with debug HUD and F3 toggle
+
+What works:
+  - Window opens at 640x480 with title "Underworld"
+  - Game loop runs at stable 60 FPS
+  - Debug overlay shows FPS, current GameState, and MovementMode
+  - F3 toggles overlay on/off
+  - Escape and X button close the game cleanly
+
+═══════════════════════════════════════════════════════════════════════
+PYTHON CONCEPTS I LEARNED
+═══════════════════════════════════════════════════════════════════════
+
+1. MODULES AND IMPORTS
+   Python files are modules. You can import values from one file into
+   another using "from setting import SCREEN_WIDTH". This keeps code
+   organized — constants live in one place, logic in another.
+
+2. CONSTANTS AND NAMING CONVENTIONS
+   Python doesn't enforce constants, but by convention ALL_CAPS names
+   mean "don't change this." Putting them in setting.py means every
+   file uses the same values and you edit in one place.
+
+3. ENUMS (from enum import Enum)
+   Enums are named constants grouped in a class. Instead of using
+   strings like "menu" (easy to typo), you use GameState.MENU which
+   Python will catch if you misspell. Each enum value has a .value
+   property (the string) and a .name property (the Python name).
+
+4. BOOLEAN TOGGLE PATTERN
+   "show_debug = not show_debug" flips True to False and back.
+   Simple, clean, works for any on/off feature.
+
+5. F-STRINGS
+   f"FPS: {clock.get_fps():.0f}" embeds expressions inside strings.
+   The :.0f part formats the number to 0 decimal places.
+
+6. TUPLES
+   Colors like (255, 0, 0) are tuples — immutable sequences. Pygame
+   uses them everywhere for coordinates, colors, and sizes.
+
+═══════════════════════════════════════════════════════════════════════
+PYGAME CONCEPTS I LEARNED
+═══════════════════════════════════════════════════════════════════════
+
+1. THE GAME LOOP (Events → Update → Draw)
+   Every game runs a loop that repeats every frame. The three phases
+   must stay separate: events handle input, update changes state,
+   draw renders to screen. Mixing them causes bugs.
+
+2. pygame.init()
+   Starts all pygame subsystems. Must be called before anything else.
+
+3. SURFACES
+   Everything you see is a Surface. The screen is a Surface. Text
+   rendering creates a Surface. Images are Surfaces. You paste them
+   onto each other with blit().
+
+4. display.set_mode((w, h))
+   Creates the window and returns the screen Surface. Flags like
+   FULLSCREEN, RESIZABLE, SCALED change window behavior.
+
+5. display.flip() — DOUBLE BUFFERING
+   You draw to a hidden "back buffer." flip() swaps it to the
+   visible screen all at once, preventing flickering.
+
+6. Clock.tick(FPS) AND dt
+   tick() caps the frame rate AND returns elapsed milliseconds.
+   Dividing by 1000 gives dt in seconds. Multiplying movement by
+   dt makes speed independent of frame rate:
+     distance = speed * dt
+   At 60 FPS: small dt, small movement per frame, same speed.
+   At 30 FPS: bigger dt, bigger movement per frame, same speed.
+
+7. clock.get_fps()
+   Returns the actual measured FPS as a float, useful for debugging.
+
+8. pygame.event.get()
+   Returns all events since last frame. MUST be called every frame
+   or the OS thinks the program is frozen. Common events:
+     QUIT — window X button
+     KEYDOWN — key pressed this frame (fires once)
+     KEYUP — key released
+
+9. pygame.font.SysFont(name, size)
+   Creates a font object. Create it ONCE before the loop, not every
+   frame. font.render() returns a text Surface, then blit() it.
+
+10. screen.fill(color)
+    Paints the entire screen one color. Call it first in the draw
+    phase to erase last frame's drawings.
+
+═══════════════════════════════════════════════════════════════════════
+HOW I USED AI TO LEARN
+═══════════════════════════════════════════════════════════════════════
+
+Approach: AI as tutor, not just code generator.
+
+1. STARTED WITH A THROWAWAY TEST
+   Instead of jumping into the full project, I asked AI to help me
+   create a minimal 1-file test (test_window.py) just to confirm
+   pygame was installed and a window could open. This gave me a
+   safe sandbox to experiment without risking the real codebase.
+
+2. ASKED FOR EXPLANATIONS, NOT JUST CODE
+   When building setting.py, I asked AI to tutor me through each
+   section. It explained WHY constants matter, what values are
+   common, and what happens if you pick the wrong tile size. I
+   typed alongside instead of just pasting.
+
+3. REQUESTED HEAVILY COMMENTED CODE
+   I asked AI to comment test_window.py line by line with concepts
+   and alternatives. This turned a 20-line file into a reference
+   document I can revisit. Every pygame function got an explanation
+   of what it does, why it exists, and what options I have.
+
+4. BUILT INCREMENTALLY
+   AI followed the session plan: test file → setting.py → enums →
+   main.py. Each step was small and testable. I ran the code after
+   each step to confirm it worked before moving on.
+
+5. ADDED MY OWN IDEAS
+   After AI set up the GameState enum, I added DEV_MENU on my own and other things along the way.
+   AI provided the structure; I extended it with my own intent.
+
+What worked well:
+  - Having a plan (TASKS_NEXT_10_SESSIONS) kept the session focused
+  - Asking "what are my options" before "write the code" built understanding
+  - Running code frequently caught problems early
+
+What I'd do differently next time:
+  - (Fill this in as you reflect)
+
+═══════════════════════════════════════════════════════════════════════
+SESSION 1 CHECKLIST STATUS
+═══════════════════════════════════════════════════════════════════════
+
+[x] Create folders: src and assets
+[x] Create settings module for constants
+[x] Implement main loop: events, update, draw, display flip, clock tick
+[x] Add debug overlay: FPS, GameState, MovementMode
+[x] Add debug toggle key (F3)
+[x] Window opens and closes cleanly
+[x] FPS stays stable near 60
+[x] Debug overlay toggles without crashing
+
+SESSION 1: COMPLETE
+
+═══════════════════════════════════════════════════════════════════════
+NEXT: SESSION 2 — TILEMAP ROOM RENDERING AND WALL COLLIDERS
+═══════════════════════════════════════════════════════════════════════
+
+Goal: Render a tilemap room and generate collider rectangles for walls.
+
+What I'll learn:
+  - 2D arrays (lists of lists) to represent a grid map
+  - Nested loops to iterate rows and columns
+  - pygame.Rect for collision rectangles
+  - pygame.draw.rect() for placeholder tile rendering
+  - Converting grid coordinates to pixel coordinates
+
+What I'll build:
+  - Room class that stores a tilemap
+  - Parser that identifies floor vs wall tiles
+  - Wall collider list (rectangles matching wall positions)
+  - Colored rectangles drawn to screen (no art needed yet)
+
+
+═══════════════════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════════════════════
+
+PHASE 1 DEV LOG — SESSION 2: TILEMAP ROOM RENDERING AND WALL COLLIDERS
+Date: February 13–14, 2026
+
+═══════════════════════════════════════════════════════════════════════
+WHAT I BUILT
+═══════════════════════════════════════════════════════════════════════
+
+Files created or modified this session:
+  - setting.py               Added FLOOR_COLOR, WALL_COLOR, directional
+                              wall colors (NORTH/SOUTH/WEST/EAST),
+                              WALL_CHARS set, and TILE_COLOR_MAP dict
+  - src/room.py              Room class + load_tilemap() helper,
+                              updated to use WALL_CHARS and TILE_COLOR_MAP
+  - assets/rooms/room_01.txt  20x15 room with directional wall chars
+  - assets/rooms/room_02.txt  40x15 two-section room (my own design)
+  - assets/rooms/room_03.txt  40x30 multi-room layout with doorways
+  - assets/rooms/room_04.txt  40x30 multi-room layout with maze section
+  - main.py                  Wired Room into the draw phase
+
+What works:
+  - Room loads from a .txt tilemap file
+  - 6 tile characters recognized: '.', '#', '-', '_', '[', ']'
+  - Each wall direction renders in a distinct placeholder color:
+      '-' north = reddish, '_' south = bluish,
+      '[' west = greenish, ']' east = yellowish, '#' interior = gray
+  - All wall types generate collision rects (blocked equally)
+  - Red debug outlines show collision rects (toggled with F3)
+  - Interior wall obstacles render correctly
+  - 4 hand-authored room templates ready for testing
+  - Rooms of different sizes work (20x15, 40x15, 40x30)
+
+═══════════════════════════════════════════════════════════════════════
+PYTHON CONCEPTS I LEARNED
+═══════════════════════════════════════════════════════════════════════
+
+1. CLASSES AND __init__
+   A class bundles data and functions together. __init__ runs when
+   you create an instance: room = Room(tilemap). "self" refers to
+   the specific instance being created. self.wall_rects stores data
+   that belongs to THAT room, not some global variable.
+
+2. LISTS OF STRINGS AS A 2D GRID
+   A tilemap like ["##..#", "#...#"] is a list where each string
+   is a row. tilemap[row][col] gets one character. This is simpler
+   than a list of lists for read-only grid data.
+
+3. NESTED LOOPS
+   for row in range(height):
+       for col in range(width):
+   This visits every cell in the grid, row by row, left to right.
+   The outer loop controls Y (vertical), inner controls X (horizontal).
+
+4. LIST COMPREHENSION
+   [line.rstrip() for line in f.readlines()] builds a list in one
+   line. It's equivalent to a loop with .append() but more compact.
+   .rstrip() removes trailing whitespace (like newline characters).
+
+5. FILE I/O WITH "with open()"
+   "with open(filepath) as f:" opens a file and guarantees it closes
+   when the block ends — even if an error occurs. This is called a
+   context manager. We used it to read tilemap text files.
+
+6. PRIVATE METHODS (underscore convention)
+   _build_wall_rects() starts with an underscore. This is a Python
+   convention meaning "this is internal — don't call it from outside
+   the class." It's not enforced, just a signal to other developers.
+
+7. APPENDING TO A LIST
+   walls = [] creates an empty list. walls.append(rect) adds items
+   one at a time. We use this pattern to collect wall rects as we
+   scan the tilemap.
+
+8. SETS
+   WALL_CHARS = {'#', '-', '_', '[', ']'} is a set — an unordered
+   collection of unique values. Checking "if char in WALL_CHARS" is
+   very fast (O(1) lookup). Sets are ideal when you need to test
+   membership against a fixed group of values.
+
+9. DICTIONARIES
+   TILE_COLOR_MAP = {'.': FLOOR_COLOR, '#': WALL_COLOR, ...} maps
+   keys to values. dict.get(key, default) returns the value for a
+   key, or a fallback if the key isn't found. We used this to look
+   up tile colors cleanly instead of chaining if/elif statements.
+
+10. DATA-DRIVEN DESIGN
+    Instead of hardcoding tile logic with if/elif chains, we store
+    behavior in data structures (sets, dicts). Adding a new tile type
+    means adding one entry to the dict — not editing drawing or
+    collision code. This is a pattern that scales well.
+
+═══════════════════════════════════════════════════════════════════════
+PYGAME CONCEPTS I LEARNED
+═══════════════════════════════════════════════════════════════════════
+
+1. pygame.Rect(x, y, width, height)
+   A rectangle object used for positioning AND collision detection.
+   It stores position (x, y) and size (width, height). We build one
+   per wall tile and store them in a list for collision checks later.
+
+2. pygame.draw.rect(surface, color, rect)
+   Draws a filled rectangle onto a surface. This is how we render
+   placeholder tiles before we have sprite art. Add a 4th argument
+   (line width) to draw just the outline instead of filling.
+
+3. DRAWING ORDER MATTERS
+   We draw floors first, then walls on top. If we drew walls first,
+   floors could paint over them. Later: tiles → entities → UI.
+   The debug outlines go LAST so they're always visible on top.
+
+4. GRID-TO-PIXEL CONVERSION
+   x = col * TILE_SIZE, y = row * TILE_SIZE. This is the core math
+   for turning a grid position into a screen position. Everything
+   in the tilemap system depends on this formula.
+
+═══════════════════════════════════════════════════════════════════════
+HOW I USED AI TO LEARN
+═══════════════════════════════════════════════════════════════════════
+
+1. AI BUILT THE STRUCTURE, I EXPERIMENTED ON TOP
+   AI created Room with WALL_COLOR. I then added NORTH_WALL_COLOR,
+   WEST_WALL_COLOR, and EAST_WALL_COLOR in setting.py on my own,
+   exploring directional wall visuals. AI provided the foundation;
+   I pushed further independently.
+
+2. MY IDEA BECAME A REAL FEATURE
+   I proposed using different characters for directional walls
+   ('-', '_', '[', ']') and designed room_02.txt myself with the
+   new format before AI wired it into the engine. I also built
+   room_03 and room_04 as multi-room layouts with doorways. AI
+   then helped formalize it into WALL_CHARS + TILE_COLOR_MAP —
+   turning my experiment into a scalable system.
+
+3. CAUGHT A REAL BUG IN REAL TIME
+   When I renamed WALL_COLOR to NORTH_WALL_COLOR in setting.py,
+   room.py still imported WALL_COLOR. Python threw an ImportError
+   immediately. This taught me why named imports catch errors fast —
+   the program won't even start if a name is wrong.
+
+4. STEP-BY-STEP WIRING
+   AI didn't dump all the code at once. It went:
+     setting.py colors → Room class → tilemap file → main.py wiring
+   Each step was testable. I could run the game after each change
+   to verify nothing broke.
+
+5. COMMENTS AS LEARNING MATERIAL
+   Every method in room.py includes docstrings explaining not just
+   WHAT it does but HOW the code works (nested loops, grid math,
+   why we build rects once). I can re-read these later as reference.
+
+6. FROM IF-CHAINS TO DATA STRUCTURES
+   The original draw() used if/else to pick wall vs floor color.
+   When I added 4 directional wall types, AI showed me how to use
+   a dictionary (TILE_COLOR_MAP) instead of a long if/elif chain.
+   This taught me the principle: when logic grows repetitive, move
+   it into data.
+
+═══════════════════════════════════════════════════════════════════════
+SESSION 2 CHECKLIST STATUS
+═══════════════════════════════════════════════════════════════════════
+
+[x] Implement Room class that stores tilemap and tile size
+[x] Parse tilemap into floor and wall tiles
+[x] Build a list of wall rects from wall tiles
+[x] Render floor and wall tiles using placeholder colors
+[x] Add a function to convert tile coordinates to pixel coordinates
+[x] Room renders consistently with correct alignment
+[x] Wall rects match wall tile positions
+[x] No stutter or misalignment when drawing
+[x] Directional wall characters ('-', '_', '[', ']') with distinct colors
+[x] WALL_CHARS set and TILE_COLOR_MAP dict for data-driven tile handling
+[x] 4 room templates authored and tested (room_01 through room_04)
+
+SESSION 2: COMPLETE
+
+═══════════════════════════════════════════════════════════════════════
+PHASE 2 BONUS — EXTRA ROOM TEMPLATES, ROOM SWITCHING, NEW TILE TYPES
+═══════════════════════════════════════════════════════════════════════
+
+Done between Session 2 and Session 3 to strengthen the foundation.
+
+═══════════════════════════════════════════════════════════════════════
+WHAT I BUILT
+═══════════════════════════════════════════════════════════════════════
+
+Files created or modified:
+  - assets/rooms/room_05.txt   20×15 arena with two symmetrical pillars
+  - assets/rooms/room_06.txt   20×15 interior maze
+  - assets/rooms/room_07.txt   20×15 "room within a room"
+  - assets/rooms/room_08.txt   20×15 four pillars, open center
+  - assets/rooms/room_09.txt   20×15 zigzag offset wall grid
+  - assets/rooms/room_10.txt   40×15 scattered structures
+  - assets/rooms/room_11.txt   40×15 prison cells (corridor theme)
+  - assets/rooms/room_12.txt   40×15 bedrooms with bunks
+  - assets/rooms/room_13.txt   40×15 shops / mixed use
+  - assets/rooms/room_14.txt   40×15 tight dungeon cells
+  - assets/rooms/room_15.txt   40×15 barracks
+  - setting.py                 Added CORNER_WALL_COLOR, SPAWN_COLOR,
+                                DOOR_COLOR, '+' to WALL_CHARS,
+                                'S' and 'D' to TILE_COLOR_MAP
+  - src/room.py                Added _find_spawn_point() → self.spawn_point,
+                                _build_door_rects() → self.door_rects,
+                                enhanced draw_debug() with door/spawn overlays
+  - main.py                    Added room switching (Left/Right arrows),
+                                ROOM_FILES list, load_room() helper,
+                                room number in debug HUD
+  - check_rooms.py             Diagnostic script for validating room files
+
+What works:
+  - 15 room templates total, all validated (consistent line widths)
+  - Left/Right arrows cycle through rooms with modulo wrapping
+  - Debug HUD shows "Room: 3/15" etc.
+  - 3 new tile characters recognized:
+      '+' corner  = pinkish (solid wall, where edges meet)
+      'S' spawn   = bright green (walkable, player start position)
+      'D' door    = purple (walkable, room transition marker)
+  - All 4 outer corners of every room use '+' characters
+  - Every room has one 'S' spawn point on open floor
+  - Rooms 03 and 04 have 'D' door markers at sub-section transitions
+  - Room class exposes self.spawn_point as (x, y) pixel center tuple
+  - Room class exposes self.door_rects as list of pygame.Rect objects
+  - Debug overlay (F3) now shows:
+      Red outlines = wall colliders
+      Blue outlines = door trigger zones
+      Green circle = spawn point
+
+═══════════════════════════════════════════════════════════════════════
+PYTHON CONCEPTS I LEARNED
+═══════════════════════════════════════════════════════════════════════
+
+1. LIST COMPREHENSIONS FOR PATH GENERATION
+   ROOM_FILES = [f"assets/rooms/room_{i:02d}.txt" for i in range(1, 16)]
+   builds 15 file paths in one line. The ":02d" format spec pads
+   numbers to 2 digits with a leading zero (01, 02, ... 15). This
+   avoids typing 15 paths by hand.
+
+2. MODULO WRAPPING (%)
+   (current_room_index + 1) % len(ROOM_FILES) wraps from the last
+   room back to 0. Modulo returns the remainder after division:
+     14 + 1 = 15, 15 % 15 = 0 (back to start)
+     0 - 1 = -1, -1 % 15 = 14 (wraps to end)
+   Python's modulo always returns a non-negative result when the
+   divisor is positive — unlike C, where -1 % 15 gives -1.
+
+3. HELPER FUNCTIONS
+   load_room(index) wraps two steps (load_tilemap + Room creation)
+   into one call. This avoids duplicating code in the Left and Right
+   key handlers. When you see the same 2-3 lines repeated, extract
+   a function.
+
+4. ASSERTIONS FOR DATA VALIDATION
+   assert grid[row][col] == '.' checks that a spawn or door marker
+   is being placed on floor. If the assertion fails, it tells you
+   exactly which file and position has the problem. Assertions are
+   development-time safety nets — they crash early with a clear
+   message instead of silently producing wrong behavior.
+
+5. TUPLE RETURN VALUES
+   _find_spawn_point() returns (x, y) or None. Returning a tuple
+   lets a function give back multiple values without defining a
+   class. The caller can unpack: x, y = spawn_point.
+
+6. NONE AS "NO VALUE"
+   spawn_point = None means "this room has no spawn." The caller
+   must check "if self.spawn_point:" before using it. This is
+   Python's way of representing the absence of a value — safer
+   than using a magic number like (-1, -1).
+
+═══════════════════════════════════════════════════════════════════════
+DEBUGGING LESSON: INCONSISTENT LINE LENGTHS
+═══════════════════════════════════════════════════════════════════════
+
+When I added room switching and tried to cycle through all 15 rooms,
+the game crashed with:
+    IndexError: string index out of range
+inside _build_wall_rects().
+
+The cause: several room .txt files had lines shorter than the first
+line's width. Room calculated self.width_in_tiles from row 0 (e.g. 40),
+then tried to access tilemap[row][col] where col=39 on a line that
+was only 39 characters long.
+
+Root causes found:
+  - room_02 had trailing blank lines after the content
+  - room_06 had one interior line that was 21 chars instead of 20
+  - rooms 10 and 12 had two lines concatenated (missing newline)
+  - rooms 12–15 had interior lines padded to 39 instead of 40
+
+Fix process:
+  1. Created check_rooms.py to scan every room file and report
+     any row whose length doesn't match the first row's length
+  2. Ran it to identify all 7 broken rooms
+  3. Fixed each room (padding, trimming, adding missing newlines)
+  4. Reran check_rooms.py until all 15 rooms passed
+
+TAKEAWAY: When authoring grid-based text data by hand, off-by-one
+padding errors are almost guaranteed. Always build a validation tool
+and run it. Don't trust your eyes — the script catches what you miss.
+
+═══════════════════════════════════════════════════════════════════════
+HOW I USED AI TO LEARN
+═══════════════════════════════════════════════════════════════════════
+
+1. ASKED FOR THEMED ROOM TEMPLATES
+   I described room themes (prison cells, bedrooms, shops, barracks)
+   and AI generated tilemap layouts. I reviewed them, noticed the
+   padding bugs, and AI helped me build a diagnostic tool rather
+   than just blindly fixing them.
+
+2. DIAGNOSTIC BEFORE FIX
+   When the IndexError hit, AI didn't guess at a fix. It created
+   check_rooms.py first to understand which rooms were broken and
+   HOW they were broken. This taught me: don't fix blindly —
+   measure first, then fix, then verify.
+
+3. DATA-DRIVEN TILE EXPANSION
+   Adding three new tile types ('+', 'S', 'D') required zero
+   changes to Room.draw(). The TILE_COLOR_MAP dictionary already
+   drives the rendering. I just added entries to the dict in
+   setting.py and the colors appeared. New parsing logic
+   (_find_spawn_point, _build_door_rects) was needed for the
+   special behavior, but drawing "just worked."
+
+4. BATCH UPDATES WITH A SCRIPT
+   Instead of editing 15 room files one at a time, AI wrote a
+   one-time Python script (update_rooms.py) that read each file,
+   inserted '+' at corners, 'S' at spawn points, and 'D' at
+   doors, then wrote them back. After running it, the script was
+   deleted. This taught me that throwaway automation beats
+   tedious manual edits.
+
+═══════════════════════════════════════════════════════════════════════
+PHASE 2 BONUS CHECKLIST STATUS
+═══════════════════════════════════════════════════════════════════════
+
+[x] Create rooms 05–15 (11 new themed templates)
+[x] All 15 rooms validated by check_rooms.py
+[x] Room switching with Left/Right arrows + modulo wrapping
+[x] Room number shown in debug HUD
+[x] '+' corner tile — solid, distinct pinkish color
+[x] 'S' spawn marker — every room has one, Room exposes spawn_point
+[x] 'D' door marker — rooms 03/04 have doors, Room exposes door_rects
+[x] Debug overlay enhanced: wall outlines, door outlines, spawn circle
+[x] No crashes when cycling through all 15 rooms
+
+PHASE 2 BONUS: COMPLETE
+
+═══════════════════════════════════════════════════════════════════════
+NEXT: SESSION 3 — PLAYER RECT MOVEMENT (TOP-DOWN) WITH COLLISION
+═══════════════════════════════════════════════════════════════════════
+
+Goal: Top-down player movement with axis-separated collision resolution.
+
+What I'll learn:
+  - pygame.key.get_pressed() for continuous input (held keys)
+  - Velocity as a concept (speed × direction)
+  - Axis-separated collision: move X then check, move Y then check
+  - Why diagonal movement needs normalization
+  - Debug drawing for the player's collision rect
+
+What I'll build:
+  - Player class with rect, speed, and input handling
+  - Collision resolution against the room's wall_rects
+  - Debug outlines for both player and walls
+
+What's already ready for Session 3:
+  - self.spawn_point gives a starting position for the player
+  - self.wall_rects gives collision targets
+  - Debug overlay framework is in place (just add player rect drawing)
+
+
+═══════════════════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════════════════════
+
+SESSION 3: PLAYER RECT MOVEMENT (TOP-DOWN) WITH COLLISION
+Date: February 14, 2026
+
+═══════════════════════════════════════════════════════════════════════
+WHAT I BUILT
+═══════════════════════════════════════════════════════════════════════
+
+Files created or modified this session:
+  - src/player.py            New file — Player class with rect, speed,
+                              input handling, axis-separated collision,
+                              draw and draw_debug methods
+  - setting.py               Added PLAYER_SIZE (24), PLAYER_SPEED (200),
+                              PLAYER_COLOR (cyan)
+  - main.py                  Imported Player, spawned at room's 'S' tile,
+                              wired update/draw/draw_debug into game loop,
+                              re-spawn on room switch, changed room cycling
+                              from Left/Right arrows to Page Up/Page Down
+
+What works:
+  - Player spawns at the room's 'S' tile (bright green marker)
+  - WASD and arrow keys move the player in 4/8 directions
+  - Player collides with all wall types and slides smoothly along them
+  - Diagonal movement is normalized (same speed in all directions)
+  - Player is a 24×24 cyan rectangle (smaller than a 32px tile)
+  - Debug overlay (F3) shows cyan outline around player collision rect
+  - Page Up / Page Down cycle rooms; player re-spawns at each room's S
+  - No sticking on corners, no jitter, no pass-through
+
+═══════════════════════════════════════════════════════════════════════
+PYTHON CONCEPTS I LEARNED
+═══════════════════════════════════════════════════════════════════════
+
+1. THE math MODULE
+   import math brings Python's math library. We used math.hypot(dx, dy)
+   which computes √(dx² + dy²) — the length of a 2D vector. This is
+   essential for diagonal normalization.
+
+2. VECTOR NORMALIZATION
+   A "vector" is just (dx, dy) — a direction. Its "length" (magnitude)
+   is math.hypot(dx, dy). Dividing both components by the length gives
+   a "unit vector" with length exactly 1. This ensures the player moves
+   at the same speed regardless of direction.
+
+   Without normalization: diagonal speed = 200 × √2 ≈ 283 px/sec
+   With normalization:    diagonal speed = 200 × 1  = 200 px/sec
+
+3. THE * UNPACKING OPERATOR
+   Player(*room.spawn_point) unpacks the tuple (x, y) into two
+   separate arguments. It's equivalent to Player(x, y) but works
+   without knowing the variable names. This is called "argument
+   unpacking" or the "splat operator."
+
+4. SEPARATION OF CONCERNS
+   The Player class doesn't know about rooms, game states, or screens.
+   It receives (x, y) for position, dt for timing, and wall_rects for
+   collision. Everything else is someone else's job. This makes Player
+   reusable — it works in any context that can provide those inputs.
+
+5. MUTABLE DEFAULT AVOIDANCE
+   The player uses pygame.Rect for position, not a separate (x, y)
+   variable. Since Rect is mutable, updating rect.x automatically
+   updates rect.center, rect.right, etc. There's no sync bug where
+   position and collision box disagree.
+
+6. AUGMENTED ASSIGNMENT (+=)
+   self.rect.x += dx * self.speed * dt is shorthand for
+   self.rect.x = self.rect.x + (dx * self.speed * dt). It's cleaner
+   and more readable for "add something to what's already there."
+
+═══════════════════════════════════════════════════════════════════════
+PYGAME CONCEPTS I LEARNED
+═══════════════════════════════════════════════════════════════════════
+
+1. pygame.key.get_pressed() vs KEYDOWN EVENTS
+   KEYDOWN fires ONCE when a key is first pressed — good for toggles
+   (F3, Escape) and one-shot actions (jump, menu select).
+   get_pressed() returns what's held RIGHT NOW — good for continuous
+   movement. If you used KEYDOWN for walking, the player would take
+   one step per key press instead of moving smoothly.
+
+2. pygame.Rect POSITIONING SHORTCUTS
+   A Rect has many settable attributes:
+     rect.x, rect.y         → top-left corner
+     rect.center            → center point (tuple)
+     rect.right, rect.bottom → edges
+     rect.topleft, rect.midbottom → more tuple shortcuts
+   Setting rect.center = (100, 200) MOVES the entire rect. All
+   other attributes update automatically.
+
+3. rect.colliderect(other)
+   Returns True if two rects overlap. This is the core of collision
+   detection — fast, built into pygame, works on any two Rects.
+
+4. COLLISION RESOLUTION BY SNAPPING
+   When the player overlaps a wall after moving, we "snap" the
+   player's edge flush against the wall's edge:
+     Moving right → self.rect.right = wall.left
+     Moving left  → self.rect.left = wall.right
+     Moving down  → self.rect.bottom = wall.top
+     Moving up    → self.rect.top = wall.bottom
+   This pushes the player OUT of the wall by exactly the right amount.
+
+5. DRAWING ORDER: ROOM → PLAYER → DEBUG
+   The room draws first (floor + walls), then the player on top, then
+   debug overlays last. If the player drew before the room, walls
+   would paint over the player. Order matters.
+
+═══════════════════════════════════════════════════════════════════════
+KEY DESIGN DECISION: AXIS-SEPARATED COLLISION
+═══════════════════════════════════════════════════════════════════════
+
+WHY NOT JUST MOVE DIAGONALLY AND CHECK?
+
+If you move both X and Y at once, then find an overlap with a wall,
+you don't know whether to push the player out horizontally or
+vertically. You'd have to guess, and guessing causes:
+  - Getting stuck on corners
+  - Teleporting through thin walls
+  - Juttery correction in the wrong direction
+
+THE TWO-PASS SOLUTION:
+  1. Move rect.x by dx * speed * dt
+  2. Check for overlaps → push out horizontally only
+  3. Move rect.y by dy * speed * dt
+  4. Check for overlaps → push out vertically only
+
+After pass 1, any overlap MUST be from horizontal movement (because
+we haven't moved vertically yet). After pass 2, any overlap MUST be
+from vertical movement. Each pass has unambiguous resolution.
+
+RESULT: The player slides smoothly along walls. Walking into a
+corner at an angle doesn't get stuck — the blocked axis stops while
+the free axis continues moving.
+
+═══════════════════════════════════════════════════════════════════════
+KEY DESIGN DECISION: PLAYER SIZE < TILE SIZE
+═══════════════════════════════════════════════════════════════════════
+
+PLAYER_SIZE = 24, TILE_SIZE = 32. The player is smaller than a tile.
+
+Why? A tile-sized player can't fit through 1-tile-wide gaps. With
+a 24×24 player and 32×32 tiles, there's 8 pixels of clearance on
+each side. The player can slip through corridors and doorways without
+getting caught on edges.
+
+This is a common 2D game trick: make the collision box slightly
+smaller than the visual grid to forgive near-misses.
+
+═══════════════════════════════════════════════════════════════════════
+HOW I USED AI TO LEARN
+═══════════════════════════════════════════════════════════════════════
+
+1. AI SEPARATED THE PLAYER FROM EVERYTHING ELSE
+   Player doesn't import Room or GameState. It receives wall_rects
+   as a parameter. AI explained why: if the player knew about rooms,
+   you'd have to rewrite it when you add levels. By keeping Player
+   ignorant of its context, it works in any mode.
+
+2. DETAILED COMMENTS AS TEACHING MATERIAL
+   Every section of player.py has block comments explaining not just
+   the code but the CONCEPT. The diagonal normalization section
+   includes the math (√2 ≈ 1.414, 41% faster). The collision
+   section explains WHY we check after each axis move. These aren't
+   just comments — they're a textbook embedded in the code.
+
+3. IDENTIFIED THE KEY BIND CONFLICT
+   When I tested, Left/Right arrows moved the player AND switched
+   rooms at the same time. I asked AI to move room switching to
+   Page Up / Page Down. This taught me: input bindings need to be
+   planned, not just assigned to whatever key is convenient.
+
+4. SPAWN POINT INTEGRATION
+   AI used the spawn_point system we built in Phase 2 immediately.
+   Player(*room.spawn_point) unpacks the tuple and positions the
+   player. On room switch, player.rect.center = room.spawn_point
+   repositions without creating a new Player. This showed me how
+   earlier foundations (Phase 2 bonus) pay off in later sessions.
+
+5. FRAME-RATE INDEPENDENCE (dt)
+   AI connected dt (built in Session 1) to movement:
+     distance = speed * dt
+   At 60 FPS, dt ≈ 0.017 → ~3.3 px/frame
+   At 30 FPS, dt ≈ 0.033 → ~6.7 px/frame
+   Either way, the player moves 200 pixels per second. This is why
+   we store speed in pixels/second, not pixels/frame.
+
+═══════════════════════════════════════════════════════════════════════
+SESSION 3 CHECKLIST STATUS
+═══════════════════════════════════════════════════════════════════════
+
+[x] Implement Player with rect, speed, and input handling
+[x] Move on X then resolve collisions against wall rects
+[x] Move on Y then resolve collisions against wall rects
+[x] Add debug draw for player rect and wall rect outlines
+[x] Clamp movement to consistent speed (diagonal normalization)
+[x] Player moves smoothly in all directions
+[x] Player cannot pass through walls
+[x] Player slides along walls without sticking
+[x] Player spawns at room's 'S' marker
+[x] Room switching re-positions player at new spawn point
+[x] Room switching moved to Page Up / Page Down (freed arrow keys)
+
+SESSION 3: COMPLETE
+
+═══════════════════════════════════════════════════════════════════════
+NEXT: SESSION 4 — GAMESTATE FRAMEWORK AND CLEAN DELEGATION
+═══════════════════════════════════════════════════════════════════════
+
+Goal: Introduce a GameState system that controls rules and transitions.
+
+What I'll learn:
+  - State pattern: active state receives input, update, draw
+  - Encapsulating room + player inside a state object
+  - Clean state transitions (enter/exit hooks)
+  - Routing input through the state instead of hardcoding in main.py
+
+What I'll build:
+  - StateManager that holds the active state
+  - At least MENU and ROGUELIKE_RUN states
+  - Room loading and player spawning moved inside the state
+  - Input/update/draw routed through the active state
+
+What's already ready for Session 4:
+  - Player class works standalone (no global state dependencies)
+  - Room class works standalone (just give it a tilemap)
+  - GameState and MovementMode enums already exist
+  - Debug HUD already shows current state and mode

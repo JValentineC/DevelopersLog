@@ -6,10 +6,11 @@
 
 /* BODY STYLING - Sets defaults for the entire page */
 body {
-  font-family: Arial, sans-serif; /* Choose a clean, readable font */
-  line-height: 1.6; /* Space between lines for readability */
-  color: #333; /* Dark gray text color */
-  background-color: #f4f4f4; /* Light gray background */
+  background: rgb(0, 0, 0) url("https://res.cloudinary.com/dlyycwdgp/image/upload/v1745770052/cherryblossom_caaafl.jpg") no-repeat center fixed;
+  background-size: cover;
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.6;
+  color: rgb(247, 237, 247);
 }
 
 /* ==========================
@@ -83,21 +84,23 @@ body {
 
 /* HERO SECTION - The big title at the top */
 .hero {
-  background-color: #2c3e50; /* Dark blue-gray background */
-  color: white; /* White text */
-  text-align: center; /* Center the text */
-  padding: 2rem; /* Add space inside (2rem = 32px) */
-  font-size: 2.5rem; /* Make text large */
-  font-weight: bold; /* Make text thick/bold */
+  background: rgba(138, 20, 105, 0.695);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  border-bottom: double rgb(248, 246, 246);
 }
 
 /* NAVIGATION BAR - The menu links */
 .navbar {
-  background-color: #34495e; /* Slightly lighter than hero */
-  padding: 1rem; /* Add space inside */
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
+  border-bottom: 2px solid rgba(138, 20, 105, 0.695);
 }
 
 /* Hamburger Menu Button */
@@ -108,16 +111,17 @@ body {
   align-items: center;
   transition: background-color 0.3s;
   border-radius: 4px;
+  border: 2px solid rgb(243, 104, 243);
 }
 
 .drawer-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(243, 104, 243, 0.2);
 }
 
 .hamburger-icon {
   width: 24px;
   height: 24px;
-  stroke: white;
+  stroke: rgb(243, 104, 243);
 }
 
 /* NAVIGATION LIST - Remove default list styling */
@@ -135,12 +139,14 @@ body {
   text-decoration: none; /* Remove underline */
   padding: 0.5rem 1rem; /* Add space around text */
   border-radius: 4px; /* Rounded corners */
-  transition: background-color 0.3s; /* Smooth color change on hover */
+  transition: all 0.3s; /* Smooth color change on hover */
+  font-weight: bold;
 }
 
 /* HOVER EFFECT - What happens when you hover over navigation */
 .navbar a:hover {
-  background-color: #2c3e50; /* Darker background on hover */
+  background-color: rgba(243, 104, 243, 0.2);
+  color: rgb(243, 104, 243);
 }
 
 /* ==========================
@@ -149,63 +155,69 @@ body {
 
 /* MAIN CONTAINER - Holds main content */
 .container {
-  max-width: 1200px; /* Don't get wider than 1200px */
-  margin: 2rem auto; /* Center container with space above/below */
+  max-width: 1000px;
+  margin: 2rem auto;
   padding: 0 1rem;
 }
 
 /* Page Title */
 .page-title {
-  color: #2c3e50;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 3px solid #3498db;
+  color: rgb(255, 255, 255);
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: thick double rgba(248, 246, 246, 0.688);
+  text-align: center;
 }
 
 /* MAIN CONTENT AREA - Main column for content */
 .main-content {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.822);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border: thick double rgba(248, 246, 246, 0.688);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.397);
 }
 
 /* MAIN TITLE - The h2 in main content */
 .main-content h2 {
-  color: #2c3e50; /* Match sidebar headings */
-  margin-bottom: 1.5rem; /* Space below */
-  font-size: 1.8rem; /* Larger text */
-  border-bottom: 2px solid #3498db; /* Blue underline */
-  padding-bottom: 0.5rem; /* Space between text and underline */
+  color: rgb(243, 104, 243);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  border-bottom: 2px solid rgb(243, 104, 243);
+  padding-bottom: 0.5rem;
 }
 
 /* DEV LOG ARTICLE ENTRIES */
 #dev-logs article {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background-color: #f9f9f9;
-  border-left: 4px solid #3498db;
-  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-left: 4px solid rgb(243, 104, 243);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #dev-logs article h3 {
-  color: #2c3e50;
+  color: rgb(243, 104, 243);
   margin-bottom: 0.5rem;
   font-size: 1.4rem;
+  font-weight: bold;
 }
 
 #dev-logs article small {
-  color: #7f8c8d;
+  color: rgb(180, 180, 180);
   font-size: 0.9rem;
   display: block;
   margin-bottom: 1rem;
 }
 
 #dev-logs article p {
-  color: #555;
+  color: rgb(230, 230, 230);
   margin-bottom: 0.75rem;
-  line-height: 1.6;
+  line-height: 1.8;
+  font-size: 1.1em;
 }
 
 #dev-logs article p:last-child {
@@ -215,29 +227,31 @@ body {
 /* TEXT FORMATTING WITHIN DEV LOGS */
 #dev-logs article strong,
 #dev-logs article b {
-  color: #2c3e50;
+  color: rgb(243, 104, 243);
   font-weight: 600;
 }
 
 #dev-logs article em,
 #dev-logs article i {
   font-style: italic;
-  color: #34495e;
+  color: rgb(200, 150, 200);
 }
 
 #dev-logs article code {
-  background-color: #ecf0f1;
+  background-color: rgba(138, 20, 105, 0.3);
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
   font-family: "Courier New", Courier, monospace;
   font-size: 0.9em;
-  color: #e74c3c;
+  color: rgb(255, 180, 255);
+  border: 1px solid rgba(243, 104, 243, 0.3);
 }
 
 #dev-logs article ul,
 #dev-logs article ol {
   margin-left: 1.5rem;
   margin-bottom: 0.75rem;
+  color: rgb(230, 230, 230);
 }
 
 #dev-logs article li {
@@ -246,19 +260,19 @@ body {
 }
 
 #dev-logs article blockquote {
-  border-left: 3px solid #3498db;
+  border-left: 3px solid rgb(243, 104, 243);
   padding-left: 1rem;
   margin: 1rem 0;
-  color: #555;
+  color: rgb(230, 230, 230);
   font-style: italic;
-  background-color: #f0f4f8;
+  background-color: rgba(138, 20, 105, 0.2);
   padding: 0.75rem 1rem;
   border-radius: 4px;
 }
 
 #dev-logs article hr {
   border: none;
-  border-top: 2px solid #ddd;
+  border-top: 2px solid rgba(243, 104, 243, 0.5);
   margin: 1.5rem 0;
 }
 
@@ -272,14 +286,14 @@ body {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(243, 104, 243, 0.3);
+  border: 2px solid rgba(243, 104, 243, 0.5);
 }
 
 .article-image figcaption {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: #7f8c8d;
+  color: rgb(180, 180, 180);
   font-style: italic;
 }
 
@@ -289,37 +303,40 @@ body {
 
 /* SIDEBAR - Left drawer sidebar */
 .sidebar {
-  background-color: #ecf0f1; /* Light gray background */
-  padding: 2rem; /* Space inside */
-  width: 300px; /* Fixed width */
+  background: rgba(138, 20, 105, 0.9);
+  padding: 2rem;
+  width: 300px;
   height: 100vh;
   overflow-y: auto;
   position: relative;
   z-index: 1001;
+  border-right: thick double rgba(248, 246, 246, 0.688);
 }
 
 /* PROFILE IMAGE - The profile picture */
 .profile-img {
-  width: 150px; /* Set width */
-  height: 150px; /* Set height */
-  border-radius: 50%; /* Make it circular (50% = perfect circle) */
-  object-fit: cover; /* Crop image to fit without stretching */
-  display: block; /* Make it a block element */
-  margin: 0 auto 1.5rem auto; /* Center it and add space below */
-  border: 3px solid #bdc3c7; /* Add a border around the image */
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  border: 3px solid rgba(248, 246, 246, 0.688);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* SIDEBAR HEADINGS - h2 elements in the sidebar */
 .sidebar h2 {
-  color: #2c3e50; /* Dark blue-gray color */
-  margin-bottom: 1rem; /* Space below heading */
-  font-size: 1.3rem; /* Slightly larger text */
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 /* SIDEBAR PARAGRAPHS - Text in the sidebar */
 .sidebar p {
-  color: #555; /* Medium gray text */
-  line-height: 1.5; /* Space between lines */
+  color: rgb(247, 237, 247);
+  line-height: 1.5;
 }
 
 /* ==========================
@@ -328,8 +345,29 @@ body {
 
 /* RESPONSIVE DESIGN - Make it work on smaller screens */
 /* @media is a "media query" - it applies styles only when conditions are met */
+@media (max-width: 1000px) {
+  body {
+    background-size: cover;
+    background-attachment: scroll;
+  }
+
+  .container {
+    margin: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .main-content {
+    padding: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   /* When screen is 768px or smaller (tablets/phones) */
+  
+  body {
+    background-size: cover;
+    background-attachment: scroll;
+  }
 
   .hero {
     font-size: 1.8rem; /* Smaller text on small screens */
@@ -354,7 +392,7 @@ body {
   }
 
   .page-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 
   /* Sidebar takes full width on mobile */
@@ -365,6 +403,10 @@ body {
   .sidebar {
     width: 100%;
   }
+
+  #dev-logs article {
+    padding: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -373,7 +415,15 @@ body {
   }
 
   .page-title {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+  }
+
+  .hero {
+    font-size: 1.5rem;
+  }
+
+  #dev-logs article p {
+    font-size: 1em;
   }
 }
 
@@ -382,12 +432,15 @@ body {
    ===================================
    1. SELECTORS: .class, element, #id
    2. BOX MODEL: margin, padding, border
-   3. COLORS: hex codes (#ffffff), rgba()
+   3. COLORS: rgb(), rgba() with transparency
    4. LAYOUT: flexbox (display: flex), fixed positioning
-   5. RESPONSIVE: media queries
-   6. EFFECTS: hover states, transitions
-   7. TYPOGRAPHY: font-size, font-weight
+   5. RESPONSIVE: media queries for mobile/tablet
+   6. EFFECTS: hover states, transitions, shadows
+   7. TYPOGRAPHY: Courier New monospace font
    8. SPACING: rem units (relative to font size)
    9. DRAWER PATTERN: checkbox hack for sidebar toggle
    10. TRANSFORMS: translateX for slide animations
+   11. BACKGROUND: full-page image with fixed attachment
+   12. THEMING: purple/pink cyberpunk aesthetic
+   13. TRANSPARENCY: semi-transparent overlays with rgba()
 */

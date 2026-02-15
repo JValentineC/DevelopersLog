@@ -21,9 +21,17 @@ fetch("devLog.json")
       article.appendChild(meta);
 
       entry.content.forEach((paragraph) => {
-        const p = document.createElement("p");
-        p.textContent = paragraph;
-        article.appendChild(p);
+        // Check if this is an image element
+        if (paragraph.startsWith("<img")) {
+          const div = document.createElement("div");
+          div.className = "article-image";
+          div.innerHTML = paragraph;
+          article.appendChild(div);
+        } else {
+          const p = document.createElement("p");
+          p.innerHTML = paragraph; // Use innerHTML to allow HTML markup
+          article.appendChild(p);
+        }
       });
 
       logsContainer.appendChild(article);

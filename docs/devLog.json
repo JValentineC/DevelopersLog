@@ -15,13 +15,21 @@
         "entryNumber": 1,
         "author": "Jonathan Ramirez",
         "content": [
-          "Phase 1 kicks off! This session I created the foundational game loop and a debug HUD for Underworld.",
-          "Files created: test_window.py (throwaway pygame test), setting.py (constants for screen size, FPS, tile size, colors), src/game_state.py (GameState and MovementMode enums), and main.py (real game loop with debug HUD and F3 toggle).",
-          "What works: Window opens at 640x480 with the title 'Underworld'. Game loop runs at a stable 60 FPS. Debug overlay shows FPS, current GameState, and MovementMode. F3 toggles the overlay on/off. Escape and the X button close the game cleanly.",
-          "Python concepts learned: Modules and imports for code organization, ALL_CAPS naming conventions for constants, Enums for type-safe state management, the boolean toggle pattern (show_debug = not show_debug), f-strings for formatted output, and tuples for colors and coordinates.",
-          "Pygame concepts learned: The game loop pattern (Events → Update → Draw), pygame.init(), Surfaces and blit(), display.set_mode() and display.flip() for double buffering, Clock.tick(FPS) for frame-rate capping and delta time, clock.get_fps() for measuring real FPS, event handling with pygame.event.get(), pygame.font.SysFont() for text rendering, and screen.fill() to clear each frame.",
-          "How I used AI: I started with a throwaway test file to confirm pygame worked before touching the real project. I asked for explanations, not just code. I requested heavily commented code so every file doubles as a reference document. AI followed an incremental plan — test file → settings → enums → main.py — each step testable. After AI set up the GameState enum, I added DEV_MENU on my own.",
-          "Key takeaway: Having a session plan kept the work focused. Asking 'what are my options' before 'write the code' built real understanding. Running code frequently caught problems early."
+          "<strong>Phase 1 kicks off!</strong> This session I created the foundational game loop and a debug HUD for <em>Underworld</em>.",
+          
+          "<strong>Files created:</strong><ul><li><code>test_window.py</code> — Throwaway pygame test</li><li><code>setting.py</code> — Constants for screen size, FPS, tile size, colors</li><li><code>src/game_state.py</code> — GameState and MovementMode enums</li><li><code>main.py</code> — Real game loop with debug HUD and F3 toggle</li></ul>",
+          
+          "<strong>What works:</strong> Window opens at 640×480 with the title <em>Underworld</em>. Game loop runs at a stable 60 FPS. Debug overlay shows FPS, current GameState, and MovementMode. <code>F3</code> toggles the overlay on/off. Escape and the X button close the game cleanly.",
+          
+          "<hr>",
+          
+          "<strong>Python concepts learned:</strong><ul><li><strong>Modules and imports</strong> for code organization</li><li><strong>ALL_CAPS naming conventions</strong> for constants</li><li><strong>Enums</strong> for type-safe state management</li><li><strong>Boolean toggle pattern</strong> — <code>show_debug = not show_debug</code></li><li><strong>f-strings</strong> for formatted output</li><li><strong>Tuples</strong> for colors and coordinates</li></ul>",
+          
+          "<strong>Pygame concepts learned:</strong><ul><li>The game loop pattern: <strong>Events → Update → Draw</strong></li><li><code>pygame.init()</code>, Surfaces and <code>blit()</code></li><li><code>display.set_mode()</code> and <code>display.flip()</code> for double buffering</li><li><code>Clock.tick(FPS)</code> for frame-rate capping and delta time</li><li><code>clock.get_fps()</code> for measuring real FPS</li><li>Event handling with <code>pygame.event.get()</code></li><li><code>pygame.font.SysFont()</code> for text rendering</li><li><code>screen.fill()</code> to clear each frame</li></ul>",
+          
+          "<strong>How I used AI:</strong> I started with a throwaway test file to confirm pygame worked before touching the real project. I asked for explanations, not just code. I requested heavily commented code so every file doubles as a reference document. AI followed an incremental plan — test file → settings → enums → main.py — each step testable. After AI set up the GameState enum, I added <code>DEV_MENU</code> on my own.",
+          
+          "<blockquote>Key takeaway: Having a session plan kept the work focused. Asking 'what are my options' before 'write the code' built real understanding. Running code frequently caught problems early.</blockquote>"
         ]
       },
       {
@@ -30,12 +38,21 @@
         "entryNumber": 2,
         "author": "Jonathan Ramirez",
         "content": [
-          "Session 2 brings the world to life — tilemap-based rooms with wall collision rectangles.",
-          "Files created or modified: setting.py (added floor/wall colors, directional wall colors, WALL_CHARS set, TILE_COLOR_MAP dict), src/room.py (Room class + load_tilemap() helper), assets/rooms/room_01.txt through room_04.txt (hand-authored room templates), and main.py (wired Room into the draw phase).",
-          "What works: Room loads from a .txt tilemap file. Six tile characters recognized: '.' (floor), '#' (interior wall), '-' (north wall), '_' (south wall), '[' (west wall), ']' (east wall). Each wall direction renders in a distinct placeholder color. All wall types generate collision rects. Red debug outlines show collision rects toggled with F3. Four room templates tested at different sizes (20x15, 40x15, 40x30).",
-          "Python concepts learned: Classes and __init__ for bundling data and behavior, lists of strings as a 2D grid for tilemaps, nested loops for iterating rows and columns, list comprehensions for compact data transforms, file I/O with 'with open()' context managers, private methods via underscore convention, appending to lists for building collections, sets for fast membership testing, dictionaries for key-value mapping, and data-driven design to replace if/elif chains.",
-          "Pygame concepts learned: pygame.Rect for positioning and collision detection, pygame.draw.rect() for placeholder tile rendering, drawing order (floors first, walls on top, debug last), and grid-to-pixel conversion (x = col * TILE_SIZE).",
-          "How I used AI: AI created Room with a basic wall color — I then added directional wall colors on my own. I proposed different characters for wall directions and designed room_02.txt myself before AI wired it into the engine. AI formalized my experiment into WALL_CHARS + TILE_COLOR_MAP, turning it into a scalable data-driven system. When I renamed WALL_COLOR, Python's ImportError in room.py taught me why named imports catch bugs fast."
+          "<strong>Session 2 brings the world to life</strong> — tilemap-based rooms with wall collision rectangles.",
+          
+          "<strong>Files created or modified:</strong><ul><li><code>setting.py</code> — Added floor/wall colors, directional wall colors, WALL_CHARS set, TILE_COLOR_MAP dict</li><li><code>src/room.py</code> — Room class + load_tilemap() helper</li><li><code>assets/rooms/room_01.txt</code> through <code>room_04.txt</code> — Hand-authored room templates</li><li><code>main.py</code> — Wired Room into the draw phase</li></ul>",
+          
+          "<strong>What works:</strong> Room loads from a <code>.txt</code> tilemap file. Six tile characters recognized:<ul><li><code>'.'</code> floor</li><li><code>'#'</code> interior wall</li><li><code>'-'</code> north wall</li><li><code>'_'</code> south wall</li><li><code>'['</code> west wall</li><li><code>']'</code> east wall</li></ul>Each wall direction renders in a distinct placeholder color. All wall types generate collision rects. Red debug outlines show collision rects toggled with <code>F3</code>. Four room templates tested at different sizes (20×15, 40×15, 40×30).",
+          
+          "<hr>",
+          
+          "<strong>Python concepts learned:</strong><ul><li><strong>Classes and __init__</strong> for bundling data and behavior</li><li><strong>Lists of strings as a 2D grid</strong> for tilemaps</li><li><strong>Nested loops</strong> for iterating rows and columns</li><li><strong>List comprehensions</strong> for compact data transforms</li><li><strong>File I/O with 'with open()'</strong> context managers</li><li><strong>Private methods</strong> via underscore convention</li><li><strong>Sets</strong> for fast membership testing</li><li><strong>Dictionaries</strong> for key-value mapping</li><li><strong>Data-driven design</strong> to replace if/elif chains</li></ul>",
+          
+          "<strong>Pygame concepts learned:</strong><ul><li><code>pygame.Rect</code> for positioning and collision detection</li><li><code>pygame.draw.rect()</code> for placeholder tile rendering</li><li><strong>Drawing order:</strong> floors first, walls on top, debug last</li><li><strong>Grid-to-pixel conversion:</strong> <code>x = col * TILE_SIZE</code></li></ul>",
+          
+          "<strong>How I used AI:</strong> AI created Room with a basic wall color — I then added directional wall colors on my own. I proposed different characters for wall directions and designed <code>room_02.txt</code> myself before AI wired it into the engine. AI formalized my experiment into <code>WALL_CHARS + TILE_COLOR_MAP</code>, turning it into a scalable data-driven system.",
+          
+          "<blockquote>When I renamed WALL_COLOR, Python's ImportError in room.py taught me why named imports catch bugs fast.</blockquote>"
         ]
       },
       {
@@ -44,12 +61,25 @@
         "entryNumber": 3,
         "author": "Jonathan Ramirez",
         "content": [
-          "Bonus work between Session 2 and Session 3 to strengthen the foundation before adding the player.",
-          "Built 11 new themed room templates (rooms 05–15): arenas, mazes, nested rooms, pillar layouts, zigzag grids, prison cells, bedrooms, shops, dungeon cells, and barracks. All 15 rooms validated with a custom diagnostic script (check_rooms.py).",
-          "Added room switching with Left/Right arrows and modulo wrapping. Debug HUD now shows 'Room: 3/15'. Three new tile characters: '+' (corner wall, pinkish), 'S' (spawn marker, bright green), 'D' (door marker, purple). Room class now exposes self.spawn_point as a pixel-center tuple and self.door_rects as a list of pygame.Rect objects. Debug overlay enhanced with wall outlines (red), door outlines (blue), and spawn circle (green).",
-          "Python concepts learned: List comprehensions for path generation with f-string formatting (:02d for zero-padded numbers), modulo wrapping for cycling through rooms, helper functions to avoid code duplication, assertions for data validation, tuple return values, and None as a sentinel for 'no value'.",
-          "Debugging lesson — Inconsistent Line Lengths: When room switching was added, the game crashed with 'IndexError: string index out of range' inside _build_wall_rects(). Several room files had lines shorter than the first line's width. Root causes included trailing blank lines, off-by-one padding, and concatenated lines from missing newlines. Fix: built check_rooms.py to diagnose all 15 rooms, fixed each one, and re-validated. Takeaway: when authoring grid-based text data by hand, always build a validation tool — don't trust your eyes.",
-          "How I used AI: I described room themes and AI generated tilemap layouts. When the IndexError hit, AI created a diagnostic tool first instead of guessing at a fix — teaching me to measure before fixing. Adding new tile types required zero changes to Room.draw() because the TILE_COLOR_MAP dictionary already drove rendering. AI also wrote a throwaway script to batch-update all 15 room files with corners, spawns, and doors — teaching me that throwaway automation beats tedious manual edits."
+          "<strong>Bonus work</strong> between Session 2 and Session 3 to strengthen the foundation before adding the player.",
+          
+          "<strong>Built 11 new themed room templates</strong> (rooms 05–15): arenas, mazes, nested rooms, pillar layouts, zigzag grids, prison cells, bedrooms, shops, dungeon cells, and barracks. All 15 rooms validated with a custom diagnostic script (<code>check_rooms.py</code>).",
+          
+          "<strong>New features added:</strong><ul><li>Room switching with Left/Right arrows and modulo wrapping</li><li>Debug HUD now shows 'Room: 3/15'</li><li>Three new tile characters:<ul><li><code>'+'</code> corner wall (pinkish)</li><li><code>'S'</code> spawn marker (bright green)</li><li><code>'D'</code> door marker (purple)</li></ul></li><li>Room class now exposes <code>self.spawn_point</code> as a pixel-center tuple</li><li>Room class exposes <code>self.door_rects</code> as a list of pygame.Rect objects</li><li>Debug overlay enhanced with wall outlines (red), door outlines (blue), and spawn circle (green)</li></ul>",
+          
+          "<hr>",
+          
+          "<strong>Python concepts learned:</strong><ul><li><strong>List comprehensions for path generation</strong> with f-string formatting (<code>:02d</code> for zero-padded numbers)</li><li><strong>Modulo wrapping</strong> for cycling through rooms</li><li><strong>Helper functions</strong> to avoid code duplication</li><li><strong>Assertions</strong> for data validation</li><li><strong>Tuple return values</strong></li><li><strong>None</strong> as a sentinel for 'no value'</li></ul>",
+          
+          "<strong>🐛 Debugging lesson — Inconsistent Line Lengths:</strong> When room switching was added, the game crashed with <code>IndexError: string index out of range</code> inside <code>_build_wall_rects()</code>. Several room files had lines shorter than the first line's width.",
+          
+          "<strong>Root causes found:</strong><ul><li>Trailing blank lines</li><li>Off-by-one padding</li><li>Concatenated lines from missing newlines</li></ul>",
+          
+          "<strong>Fix:</strong> Built <code>check_rooms.py</code> to diagnose all 15 rooms, fixed each one, and re-validated.",
+          
+          "<blockquote>Takeaway: When authoring grid-based text data by hand, always build a validation tool — don't trust your eyes.</blockquote>",
+          
+          "<strong>How I used AI:</strong> I described room themes and AI generated tilemap layouts. When the IndexError hit, AI created a diagnostic tool first instead of guessing at a fix — teaching me to <em>measure before fixing</em>. AI also wrote a throwaway script to batch-update all 15 room files — teaching me that throwaway automation beats tedious manual edits."
         ]
       },
       {
@@ -58,14 +88,31 @@
         "entryNumber": 4,
         "author": "Jonathan Ramirez",
         "content": [
-          "The player enters the world! Top-down movement with axis-separated collision resolution.",
-          "Files created or modified: src/player.py (new — Player class with rect, speed, input handling, axis-separated collision, draw and draw_debug methods), setting.py (added PLAYER_SIZE=24, PLAYER_SPEED=200, PLAYER_COLOR=cyan), main.py (imported Player, spawned at room's 'S' tile, wired update/draw/draw_debug into game loop, moved room cycling to Page Up/Page Down).",
-          "What works: Player spawns at the room's 'S' tile. WASD and arrow keys move the player in 4/8 directions. Player collides with all wall types and slides smoothly along them. Diagonal movement is normalized (same speed in all directions). Player is a 24x24 cyan rectangle (smaller than a 32px tile for corridor clearance). Debug overlay shows cyan outline around the player collision rect. Page Up/Page Down cycle rooms with player re-spawn. No sticking, no jitter, no pass-through.",
-          "Python concepts learned: The math module and math.hypot() for vector length, vector normalization to ensure consistent diagonal speed (without it diagonal = 200 * sqrt(2) = 283 px/sec; with it = 200 px/sec), the * unpacking operator for splatting tuples into arguments, separation of concerns (Player knows nothing about rooms or game state), mutable Rect objects that keep position and collision box in sync, and augmented assignment (+=) for readable movement code.",
-          "Pygame concepts learned: pygame.key.get_pressed() for continuous held-key input vs KEYDOWN for one-shot events, pygame.Rect positioning shortcuts (center, right, bottom, topleft, midbottom), rect.colliderect() for overlap detection, collision resolution by snapping edges (e.g., self.rect.right = wall.left), and drawing order (room → player → debug).",
-          "Key design decision — Axis-Separated Collision: Moving both axes at once makes it ambiguous whether to push out horizontally or vertically, causing corner sticking, wall teleporting, and jittery corrections. The two-pass solution moves X first, resolves horizontal overlaps, then moves Y and resolves vertical overlaps. Each pass has unambiguous resolution. Result: smooth wall sliding without getting stuck on corners.",
-          "Key design decision — Player Size < Tile Size: PLAYER_SIZE=24 vs TILE_SIZE=32 leaves 8 pixels of clearance per side, letting the player slip through 1-tile-wide corridors and doorways. This is a common 2D game trick — make the collision box slightly smaller than the grid to forgive near-misses.",
-          "How I used AI: AI kept Player independent of Room and GameState by passing wall_rects as a parameter — making Player reusable in any context. Every code section includes block comments explaining concepts, not just syntax. AI identified the key bind conflict where arrow keys moved the player and switched rooms simultaneously — moved room switching to Page Up/Page Down. The spawn_point system built in the bonus phase paid off immediately via Player(*room.spawn_point). Delta time from Session 1 powered frame-rate independent movement: speed in pixels/second, not pixels/frame."
+          "<strong>The player enters the world!</strong> Top-down movement with axis-separated collision resolution.",
+          
+          "<img src=\"assets/Screenshot 2026-02-14 143518.png\" alt=\"Underworld game screenshot showing player movement and collision\">",
+          
+          "<strong>Files created or modified:</strong><ul><li><code>src/player.py</code> — New Player class with rect, speed, input handling, axis-separated collision, draw and draw_debug methods</li><li><code>setting.py</code> — Added PLAYER_SIZE=24, PLAYER_SPEED=200, PLAYER_COLOR=cyan</li><li><code>main.py</code> — Imported Player, spawned at room's 'S' tile, wired update/draw/draw_debug into game loop, moved room cycling to Page Up/Page Down</li></ul>",
+          
+          "<strong>What works:</strong><ul><li>Player spawns at the room's <code>'S'</code> tile</li><li>WASD and arrow keys move the player in 4/8 directions</li><li>Player collides with all wall types and slides smoothly along them</li><li>Diagonal movement is normalized (same speed in all directions)</li><li>Player is a 24×24 cyan rectangle (smaller than a 32px tile for corridor clearance)</li><li>Debug overlay shows cyan outline around the player collision rect</li><li>Page Up/Page Down cycle rooms with player re-spawn</li><li>No sticking, no jitter, no pass-through</li></ul>",
+          
+          "<hr>",
+          
+          "<strong>Python concepts learned:</strong><ul><li>The <code>math</code> module and <code>math.hypot()</code> for vector length</li><li><strong>Vector normalization</strong> to ensure consistent diagonal speed:<ul><li>Without: diagonal = 200 × √2 ≈ 283 px/sec</li><li>With: diagonal = 200 × 1 = 200 px/sec</li></ul></li><li>The <code>*</code> unpacking operator for splatting tuples into arguments</li><li><strong>Separation of concerns</strong> — Player knows nothing about rooms or game state</li><li>Mutable Rect objects that keep position and collision box in sync</li><li>Augmented assignment <code>+=</code> for readable movement code</li></ul>",
+          
+          "<strong>Pygame concepts learned:</strong><ul><li><code>pygame.key.get_pressed()</code> for continuous held-key input vs KEYDOWN for one-shot events</li><li><code>pygame.Rect</code> positioning shortcuts: <code>center</code>, <code>right</code>, <code>bottom</code>, <code>topleft</code>, <code>midbottom</code></li><li><code>rect.colliderect()</code> for overlap detection</li><li>Collision resolution by snapping edges: <code>self.rect.right = wall.left</code></li><li>Drawing order: room → player → debug</li></ul>",
+          
+          "<strong>🎯 Key design decision — Axis-Separated Collision:</strong> Moving both axes at once makes it ambiguous whether to push out horizontally or vertically, causing corner sticking, wall teleporting, and jittery corrections.",
+          
+          "<strong>The two-pass solution:</strong><ol><li>Move X, resolve horizontal overlaps</li><li>Move Y, resolve vertical overlaps</li></ol>Each pass has unambiguous resolution.",
+          
+          "<strong>Result:</strong> Smooth wall sliding without getting stuck on corners.",
+          
+          "<strong>🎯 Key design decision — Player Size < Tile Size:</strong> <code>PLAYER_SIZE=24</code> vs <code>TILE_SIZE=32</code> leaves 8 pixels of clearance per side, letting the player slip through 1-tile-wide corridors and doorways.",
+          
+          "<blockquote>This is a common 2D game trick — make the collision box slightly smaller than the grid to forgive near-misses.</blockquote>",
+          
+          "<strong>How I used AI:</strong> AI kept Player independent of Room and GameState by passing <code>wall_rects</code> as a parameter — making Player reusable in any context. Every code section includes block comments explaining concepts, not just syntax. AI identified the key bind conflict where arrow keys moved the player and switched rooms simultaneously. The <code>spawn_point</code> system built in the bonus phase paid off immediately via <code>Player(*room.spawn_point)</code>. Delta time from Session 1 powered frame-rate independent movement: speed in pixels/second, not pixels/frame."
         ]
       }
     ]

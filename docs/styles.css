@@ -212,6 +212,77 @@ body {
   margin-bottom: 0;
 }
 
+/* TEXT FORMATTING WITHIN DEV LOGS */
+#dev-logs article strong,
+#dev-logs article b {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+#dev-logs article em,
+#dev-logs article i {
+  font-style: italic;
+  color: #34495e;
+}
+
+#dev-logs article code {
+  background-color: #ecf0f1;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
+  color: #e74c3c;
+}
+
+#dev-logs article ul,
+#dev-logs article ol {
+  margin-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+#dev-logs article li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+#dev-logs article blockquote {
+  border-left: 3px solid #3498db;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #555;
+  font-style: italic;
+  background-color: #f0f4f8;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+}
+
+#dev-logs article hr {
+  border: none;
+  border-top: 2px solid #ddd;
+  margin: 1.5rem 0;
+}
+
+/* Article Images */
+.article-image {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.article-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ddd;
+}
+
+.article-image figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
 /* ==========================
    SIDEBAR STYLES
    ========================== */

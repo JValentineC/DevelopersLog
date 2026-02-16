@@ -6,7 +6,9 @@
 
 /* BODY STYLING - Sets defaults for the entire page */
 body {
-  background: rgb(0, 0, 0) url("https://res.cloudinary.com/dlyycwdgp/image/upload/v1745770052/cherryblossom_caaafl.jpg") no-repeat center fixed;
+  background: rgb(0, 0, 0)
+    url("https://res.cloudinary.com/dlyycwdgp/image/upload/v1745770052/cherryblossom_caaafl.jpg")
+    no-repeat center fixed;
   background-size: cover;
   font-family: "Courier New", Courier, monospace;
   line-height: 1.6;
@@ -363,7 +365,7 @@ body {
 
 @media (max-width: 768px) {
   /* When screen is 768px or smaller (tablets/phones) */
-  
+
   body {
     background-size: cover;
     background-attachment: scroll;

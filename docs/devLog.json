@@ -16,19 +16,19 @@
         "author": "Jonathan Ramirez",
         "content": [
           "<strong>Phase 1 kicks off!</strong> This session I created the foundational game loop and a debug HUD for <em>Underworld</em>.",
-          
+
           "<strong>Files created:</strong><ul><li><code>test_window.py</code> — Throwaway pygame test</li><li><code>setting.py</code> — Constants for screen size, FPS, tile size, colors</li><li><code>src/game_state.py</code> — GameState and MovementMode enums</li><li><code>main.py</code> — Real game loop with debug HUD and F3 toggle</li></ul>",
-          
+
           "<strong>What works:</strong> Window opens at 640×480 with the title <em>Underworld</em>. Game loop runs at a stable 60 FPS. Debug overlay shows FPS, current GameState, and MovementMode. <code>F3</code> toggles the overlay on/off. Escape and the X button close the game cleanly.",
-          
+
           "<hr>",
-          
+
           "<strong>Python concepts learned:</strong><ul><li><strong>Modules and imports</strong> for code organization</li><li><strong>ALL_CAPS naming conventions</strong> for constants</li><li><strong>Enums</strong> for type-safe state management</li><li><strong>Boolean toggle pattern</strong> — <code>show_debug = not show_debug</code></li><li><strong>f-strings</strong> for formatted output</li><li><strong>Tuples</strong> for colors and coordinates</li></ul>",
-          
+
           "<strong>Pygame concepts learned:</strong><ul><li>The game loop pattern: <strong>Events → Update → Draw</strong></li><li><code>pygame.init()</code>, Surfaces and <code>blit()</code></li><li><code>display.set_mode()</code> and <code>display.flip()</code> for double buffering</li><li><code>Clock.tick(FPS)</code> for frame-rate capping and delta time</li><li><code>clock.get_fps()</code> for measuring real FPS</li><li>Event handling with <code>pygame.event.get()</code></li><li><code>pygame.font.SysFont()</code> for text rendering</li><li><code>screen.fill()</code> to clear each frame</li></ul>",
-          
+
           "<strong>How I used AI:</strong> I started with a throwaway test file to confirm pygame worked before touching the real project. I asked for explanations, not just code. I requested heavily commented code so every file doubles as a reference document. AI followed an incremental plan — test file → settings → enums → main.py — each step testable. After AI set up the GameState enum, I added <code>DEV_MENU</code> on my own.",
-          
+
           "<blockquote>Key takeaway: Having a session plan kept the work focused. Asking 'what are my options' before 'write the code' built real understanding. Running code frequently caught problems early.</blockquote>"
         ]
       },
@@ -39,19 +39,19 @@
         "author": "Jonathan Ramirez",
         "content": [
           "<strong>Session 2 brings the world to life</strong> — tilemap-based rooms with wall collision rectangles.",
-          
+
           "<strong>Files created or modified:</strong><ul><li><code>setting.py</code> — Added floor/wall colors, directional wall colors, WALL_CHARS set, TILE_COLOR_MAP dict</li><li><code>src/room.py</code> — Room class + load_tilemap() helper</li><li><code>assets/rooms/room_01.txt</code> through <code>room_04.txt</code> — Hand-authored room templates</li><li><code>main.py</code> — Wired Room into the draw phase</li></ul>",
-          
+
           "<strong>What works:</strong> Room loads from a <code>.txt</code> tilemap file. Six tile characters recognized:<ul><li><code>'.'</code> floor</li><li><code>'#'</code> interior wall</li><li><code>'-'</code> north wall</li><li><code>'_'</code> south wall</li><li><code>'['</code> west wall</li><li><code>']'</code> east wall</li></ul>Each wall direction renders in a distinct placeholder color. All wall types generate collision rects. Red debug outlines show collision rects toggled with <code>F3</code>. Four room templates tested at different sizes (20×15, 40×15, 40×30).",
-          
+
           "<hr>",
-          
+
           "<strong>Python concepts learned:</strong><ul><li><strong>Classes and __init__</strong> for bundling data and behavior</li><li><strong>Lists of strings as a 2D grid</strong> for tilemaps</li><li><strong>Nested loops</strong> for iterating rows and columns</li><li><strong>List comprehensions</strong> for compact data transforms</li><li><strong>File I/O with 'with open()'</strong> context managers</li><li><strong>Private methods</strong> via underscore convention</li><li><strong>Sets</strong> for fast membership testing</li><li><strong>Dictionaries</strong> for key-value mapping</li><li><strong>Data-driven design</strong> to replace if/elif chains</li></ul>",
-          
+
           "<strong>Pygame concepts learned:</strong><ul><li><code>pygame.Rect</code> for positioning and collision detection</li><li><code>pygame.draw.rect()</code> for placeholder tile rendering</li><li><strong>Drawing order:</strong> floors first, walls on top, debug last</li><li><strong>Grid-to-pixel conversion:</strong> <code>x = col * TILE_SIZE</code></li></ul>",
-          
+
           "<strong>How I used AI:</strong> AI created Room with a basic wall color — I then added directional wall colors on my own. I proposed different characters for wall directions and designed <code>room_02.txt</code> myself before AI wired it into the engine. AI formalized my experiment into <code>WALL_CHARS + TILE_COLOR_MAP</code>, turning it into a scalable data-driven system.",
-          
+
           "<blockquote>When I renamed WALL_COLOR, Python's ImportError in room.py taught me why named imports catch bugs fast.</blockquote>"
         ]
       },
@@ -62,23 +62,23 @@
         "author": "Jonathan Ramirez",
         "content": [
           "<strong>Bonus work</strong> between Session 2 and Session 3 to strengthen the foundation before adding the player.",
-          
+
           "<strong>Built 11 new themed room templates</strong> (rooms 05–15): arenas, mazes, nested rooms, pillar layouts, zigzag grids, prison cells, bedrooms, shops, dungeon cells, and barracks. All 15 rooms validated with a custom diagnostic script (<code>check_rooms.py</code>).",
-          
+
           "<strong>New features added:</strong><ul><li>Room switching with Left/Right arrows and modulo wrapping</li><li>Debug HUD now shows 'Room: 3/15'</li><li>Three new tile characters:<ul><li><code>'+'</code> corner wall (pinkish)</li><li><code>'S'</code> spawn marker (bright green)</li><li><code>'D'</code> door marker (purple)</li></ul></li><li>Room class now exposes <code>self.spawn_point</code> as a pixel-center tuple</li><li>Room class exposes <code>self.door_rects</code> as a list of pygame.Rect objects</li><li>Debug overlay enhanced with wall outlines (red), door outlines (blue), and spawn circle (green)</li></ul>",
-          
+
           "<hr>",
-          
+
           "<strong>Python concepts learned:</strong><ul><li><strong>List comprehensions for path generation</strong> with f-string formatting (<code>:02d</code> for zero-padded numbers)</li><li><strong>Modulo wrapping</strong> for cycling through rooms</li><li><strong>Helper functions</strong> to avoid code duplication</li><li><strong>Assertions</strong> for data validation</li><li><strong>Tuple return values</strong></li><li><strong>None</strong> as a sentinel for 'no value'</li></ul>",
-          
+
           "<strong>🐛 Debugging lesson — Inconsistent Line Lengths:</strong> When room switching was added, the game crashed with <code>IndexError: string index out of range</code> inside <code>_build_wall_rects()</code>. Several room files had lines shorter than the first line's width.",
-          
+
           "<strong>Root causes found:</strong><ul><li>Trailing blank lines</li><li>Off-by-one padding</li><li>Concatenated lines from missing newlines</li></ul>",
-          
+
           "<strong>Fix:</strong> Built <code>check_rooms.py</code> to diagnose all 15 rooms, fixed each one, and re-validated.",
-          
+
           "<blockquote>Takeaway: When authoring grid-based text data by hand, always build a validation tool — don't trust your eyes.</blockquote>",
-          
+
           "<strong>How I used AI:</strong> I described room themes and AI generated tilemap layouts. When the IndexError hit, AI created a diagnostic tool first instead of guessing at a fix — teaching me to <em>measure before fixing</em>. AI also wrote a throwaway script to batch-update all 15 room files — teaching me that throwaway automation beats tedious manual edits."
         ]
       },
@@ -89,30 +89,62 @@
         "author": "Jonathan Ramirez",
         "content": [
           "<strong>The player enters the world!</strong> Top-down movement with axis-separated collision resolution.",
-          
+
           "<img src=\"assets/Screenshot 2026-02-14 143518.png\" alt=\"Underworld game screenshot showing player movement and collision\">",
-          
+
           "<strong>Files created or modified:</strong><ul><li><code>src/player.py</code> — New Player class with rect, speed, input handling, axis-separated collision, draw and draw_debug methods</li><li><code>setting.py</code> — Added PLAYER_SIZE=24, PLAYER_SPEED=200, PLAYER_COLOR=cyan</li><li><code>main.py</code> — Imported Player, spawned at room's 'S' tile, wired update/draw/draw_debug into game loop, moved room cycling to Page Up/Page Down</li></ul>",
-          
+
           "<strong>What works:</strong><ul><li>Player spawns at the room's <code>'S'</code> tile</li><li>WASD and arrow keys move the player in 4/8 directions</li><li>Player collides with all wall types and slides smoothly along them</li><li>Diagonal movement is normalized (same speed in all directions)</li><li>Player is a 24×24 cyan rectangle (smaller than a 32px tile for corridor clearance)</li><li>Debug overlay shows cyan outline around the player collision rect</li><li>Page Up/Page Down cycle rooms with player re-spawn</li><li>No sticking, no jitter, no pass-through</li></ul>",
-          
+
           "<hr>",
-          
+
           "<strong>Python concepts learned:</strong><ul><li>The <code>math</code> module and <code>math.hypot()</code> for vector length</li><li><strong>Vector normalization</strong> to ensure consistent diagonal speed:<ul><li>Without: diagonal = 200 × √2 ≈ 283 px/sec</li><li>With: diagonal = 200 × 1 = 200 px/sec</li></ul></li><li>The <code>*</code> unpacking operator for splatting tuples into arguments</li><li><strong>Separation of concerns</strong> — Player knows nothing about rooms or game state</li><li>Mutable Rect objects that keep position and collision box in sync</li><li>Augmented assignment <code>+=</code> for readable movement code</li></ul>",
-          
+
           "<strong>Pygame concepts learned:</strong><ul><li><code>pygame.key.get_pressed()</code> for continuous held-key input vs KEYDOWN for one-shot events</li><li><code>pygame.Rect</code> positioning shortcuts: <code>center</code>, <code>right</code>, <code>bottom</code>, <code>topleft</code>, <code>midbottom</code></li><li><code>rect.colliderect()</code> for overlap detection</li><li>Collision resolution by snapping edges: <code>self.rect.right = wall.left</code></li><li>Drawing order: room → player → debug</li></ul>",
-          
+
           "<strong>🎯 Key design decision — Axis-Separated Collision:</strong> Moving both axes at once makes it ambiguous whether to push out horizontally or vertically, causing corner sticking, wall teleporting, and jittery corrections.",
-          
+
           "<strong>The two-pass solution:</strong><ol><li>Move X, resolve horizontal overlaps</li><li>Move Y, resolve vertical overlaps</li></ol>Each pass has unambiguous resolution.",
-          
+
           "<strong>Result:</strong> Smooth wall sliding without getting stuck on corners.",
-          
+
           "<strong>🎯 Key design decision — Player Size < Tile Size:</strong> <code>PLAYER_SIZE=24</code> vs <code>TILE_SIZE=32</code> leaves 8 pixels of clearance per side, letting the player slip through 1-tile-wide corridors and doorways.",
-          
+
           "<blockquote>This is a common 2D game trick — make the collision box slightly smaller than the grid to forgive near-misses.</blockquote>",
-          
+
           "<strong>How I used AI:</strong> AI kept Player independent of Room and GameState by passing <code>wall_rects</code> as a parameter — making Player reusable in any context. Every code section includes block comments explaining concepts, not just syntax. AI identified the key bind conflict where arrow keys moved the player and switched rooms simultaneously. The <code>spawn_point</code> system built in the bonus phase paid off immediately via <code>Player(*room.spawn_point)</code>. Delta time from Session 1 powered frame-rate independent movement: speed in pixels/second, not pixels/frame."
+        ]
+      },
+      {
+        "entryTitle": "Session 4: GameState Framework and Clean Delegation",
+        "date": "2026-02-15",
+        "entryNumber": 5,
+        "author": "Jonathan Ramirez",
+        "content": [
+          "<strong>The engine grows up!</strong> All gameplay logic moves out of main.py into proper game states controlled by a StateManager.",
+
+          "<img src=\"assets/Screenshot 2026-02-15 192032.png\" alt=\"Underworld title screen showing menu state\">",
+          "<img src=\"assets/Screenshot 2026-02-15 191530.png\" alt=\"Underworld gameplay showing state transitions\">",
+
+          "<strong>Files created or modified:</strong><ul><li><code>src/state_manager.py</code> — New StateManager class with <code>register_state()</code>, <code>change_state()</code>, and enter/exit lifecycle hooks</li><li><code>states/menu_state.py</code> — New MenuState with title screen, ENTER to start, ESC to quit</li><li><code>states/roguelike_state.py</code> — New RoguelikeState with room loading, player spawning, room cycling, ESC to return to menu</li><li><code>main.py</code> — Refactored to delegate all input/update/draw through StateManager; removed all direct room/player code</li><li>Deleted <code>roquelike_state.py</code> (fixed filename typo → <code>roguelike_state.py</code>)</li></ul>",
+
+          "<strong>What works:</strong><ul><li>Game starts on a title screen showing \"UNDERWORLD\" and \"Press ENTER to start\"</li><li>ENTER on menu transitions to roguelike gameplay (room + player appear)</li><li>ESC in roguelike returns to the menu cleanly</li><li>ESC on the menu quits the game entirely</li><li>PgUp/PgDn still cycles through all 15 rooms inside the roguelike state</li><li>Player and room are created in <code>enter()</code> and cleaned up in <code>exit()</code> — no stale data</li><li>F3 debug overlay works in all states (handled globally in main.py)</li><li>Debug HUD shows engine info (FPS, active state name) plus state-specific info (mode, room number)</li><li>Re-entering roguelike from menu creates a fresh room and player every time</li><li>No global state hacks, no duplicated loops</li></ul>",
+
+          "<hr>",
+
+          "<strong>Python concepts learned:</strong><ul><li><strong>The State pattern</strong> — each state implements the same interface (<code>enter</code>, <code>exit</code>, <code>handle_event</code>, <code>update</code>, <code>draw</code>), and the manager doesn't care what's inside</li><li><strong>Dictionaries as registries</strong> — states stored by string key for flexible lookup</li><li><strong>Lifecycle hooks</strong> — <code>enter()</code> for setup, <code>exit()</code> for cleanup, <code>__init__()</code> only for one-time initialization</li><li><strong>Delegation vs ownership</strong> — main.py delegates to the manager, which delegates to the active state</li><li><strong>None as a sentinel</strong> — setting <code>self.player = None</code> in <code>exit()</code> makes stale access obvious</li><li><strong>hasattr() for optional methods</strong> — <code>draw_debug</code> is optional, checked before calling</li><li><strong>The running flag pattern</strong> — states set <code>state_manager.running = False</code> instead of calling <code>pygame.quit()</code> themselves</li></ul>",
+
+          "<strong>Pygame concepts learned:</strong><ul><li><strong>Text centering</strong> with <code>get_rect(center=(...))</code> — render text as a Surface, get its Rect, set center, then blit at Rect position</li><li><strong>Multiple font sizes</strong> — title_font at 64px for headings, prompt_font at 32px for instructions</li><li><strong>Event routing</strong> — main.py loops events and forwards each one to the active state, letting each state decide what keys mean</li></ul>",
+
+          "<strong>🎯 Key design decision — State Pattern for Game Modes:</strong> Before Session 4, main.py contained everything: room loading, player creation, input handling, update logic, drawing, and room switching. That worked for testing but doesn't scale.",
+
+          "<blockquote>The state pattern solves this:<ul><li>StateManager holds a dictionary of states and routes all calls to the active one</li><li>Each state owns its own entities and rules</li><li>Switching states calls <code>exit()</code> on the old state and <code>enter()</code> on the new one</li><li>main.py shrinks to just: init → register states → run loop → delegate → quit</li></ul>Result: main.py went from 211 lines of mixed concerns to a clean 160-line delegation shell. All gameplay moved into RoguelikeState (279 lines) where it belongs.</blockquote>",
+
+          "<strong>🎯 Key design decision — ESC Means Different Things:</strong> In the menu, ESC quits the game. In the roguelike, ESC returns to the menu. Each state decides what its keys do — that's the whole point. No giant if/elif chain checking what state we're in.",
+
+          "<strong>🎯 Key design decision — enter/exit vs __init__:</strong> <code>__init__()</code> runs ONCE when the state is created at startup. <code>enter()</code> runs EVERY TIME we switch to that state. This means going menu → roguelike → menu → roguelike creates a fresh room and player the second time, without recreating the state object itself. <code>exit()</code> sets room and player to None so stale data can't linger.",
+
+          "<strong>How I used AI:</strong> AI implemented the full state pattern across four files in one pass — StateManager, MenuState, RoguelikeState, and refactored main.py — keeping all existing behavior intact while reorganizing the architecture. AI caught the old typo in <code>roquelike_state.py</code> and replaced it with the correctly named file. AI ran a programmatic transition test (menu → roguelike → menu → roguelike) to verify all enter/exit hooks work before touching the game loop. The debug HUD was split into layers: main.py draws engine-level info (FPS, state name) and each state draws its own info below (mode, room number) — clean separation without either side needing to know about the other."
         ]
       }
     ]
